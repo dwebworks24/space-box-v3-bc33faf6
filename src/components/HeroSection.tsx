@@ -12,14 +12,14 @@ import table1Image from "@/assets/hero/sofa-table1.webp";
 import table2Image from "@/assets/hero/sofa-table2.webp";
 import chairImage from "@/assets/hero/sofa-chair.webp";
 
-// Scene 2: Bedroom
-import bedroomBg from "@/assets/hero/bedroom-bg.webp";
-import bedroomBed from "@/assets/hero/bedroom-bed.png";
-import bedroomNightstand from "@/assets/hero/bedroom-nightstand.png";
-import bedroomLamp from "@/assets/hero/bedroom-lamp.png";
-import bedroomPlant from "@/assets/hero/bedroom-plant.png";
-import bedroomChair from "@/assets/hero/bedroom-chair.png";
-import bedroomArt from "@/assets/hero/bedroom-art.png";
+// Scene 2: Modern Living Room
+import livingBg from "@/assets/hero/living-bg.webp";
+import livingSofa from "@/assets/hero/living-sofa.png";
+import livingTable from "@/assets/hero/living-table.png";
+import livingLamp from "@/assets/hero/living-lamp.png";
+import livingPlant from "@/assets/hero/living-plant.png";
+import livingChair from "@/assets/hero/living-chair.png";
+import livingArt from "@/assets/hero/living-art.png";
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
