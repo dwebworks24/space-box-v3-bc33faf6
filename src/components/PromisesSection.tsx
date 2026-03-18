@@ -85,7 +85,7 @@ const PromisesSection = () => {
               <div className="flex items-start gap-5">
                 <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center border border-border group-hover:border-secondary transition-colors duration-500">
                   <p.icon
-                    className="w-5 h-5 text-muted-foreground group-hover:text-secondary transition-colors duration-500"
+                    className="w-5 h-5 text-secondary transition-colors duration-500"
                     strokeWidth={1.5}
                   />
                 </div>
