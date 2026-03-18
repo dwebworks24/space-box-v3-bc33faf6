@@ -214,7 +214,13 @@ export default function Galaxy({
   useEffect(() => {
     if (!ctnDom.current) return;
     const ctn = ctnDom.current;
+
+    // Create a canvas and append it so OGL's Renderer can get a valid WebGL context
+    const canvas = document.createElement('canvas');
+    ctn.appendChild(canvas);
+
     const renderer = new Renderer({
+      canvas,
       alpha: transparent,
       premultipliedAlpha: false,
     });
