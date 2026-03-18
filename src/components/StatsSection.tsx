@@ -31,20 +31,22 @@ const containerVariants = {
 };
 
 const statVariant = {
-  hidden: { opacity: 0, y: 40, scale: 0.8 },
+  hidden: { opacity: 0, y: 50, scale: 0.7, filter: "blur(8px)" },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.7, ease: easeOut },
+    filter: "blur(0px)",
+    transition: { duration: 0.8, ease: easeOut },
   },
 };
 
-const lineReveal = {
-  hidden: { scaleX: 0 },
+const ringReveal = {
+  hidden: { pathLength: 0, opacity: 0 },
   visible: {
-    scaleX: 1,
-    transition: { duration: 0.6, ease: easeOut, delay: 0.3 },
+    pathLength: 1,
+    opacity: 1,
+    transition: { duration: 1.5, ease: easeOut },
   },
 };
 
@@ -88,17 +90,37 @@ const StatsSection = () => {
           <motion.div
             key={s.label}
             variants={statVariant}
-            whileHover={{ scale: 1.08, transition: { duration: 0.3 } }}
+            whileHover={{ scale: 1.1, y: -4, transition: { type: "spring", stiffness: 300 } }}
             className="group cursor-default"
           >
-            <div className="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-full border-[3px] border-white/80 outline outline-[3px] outline-offset-4 outline-white/40 flex items-center justify-center">
+            {/* SVG ring draw animation */}
+            <div className="w-28 h-28 md:w-36 md:h-36 mx-auto relative flex items-center justify-center">
+              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="2" />
+                <motion.circle
+                  cx="50"
+                  cy="50"
+                  r="46"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.8)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  variants={ringReveal}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                />
+              </svg>
               <span className="text-3xl md:text-5xl font-display text-secondary drop-shadow-lg">
                 <AnimatedCounter value={s.value} suffix={s.suffix} />
               </span>
             </div>
             <motion.div
-              variants={lineReveal}
-              className="h-[2px] w-12 bg-secondary/50 mx-auto my-4 origin-center group-hover:w-20 transition-all duration-500"
+              className="h-[2px] w-12 bg-secondary/50 mx-auto my-4 origin-center"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: easeOut, delay: 0.5 }}
             />
             <div className="text-white/80 text-sm font-body uppercase tracking-widest">
               {s.label}

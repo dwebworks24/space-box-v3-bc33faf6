@@ -18,6 +18,34 @@ export const services = [
   { slug: "quality-of-service", title: "Quality of Service", image: qualityImg, desc: "Snag correction, decor layering & meticulous finishing.", fullDesc: "Quality is at the heart of everything we do. Our meticulous approach includes thorough snag correction, precise decor layering, and attention to the finest finishing details. We conduct multiple quality checks throughout the project to ensure every element meets our exacting standards and your expectations." },
 ];
 
+const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const headerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const fadeBlurUp = {
+  hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.8, ease: easeOut },
+  },
+};
+
+const cardVariant = (i: number) => ({
+  hidden: { opacity: 0, y: 60, scale: 0.9, rotateY: -8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    rotateY: 0,
+    transition: { delay: i * 0.08, duration: 0.7, ease: easeOut },
+  },
+});
+
 const ServicesSection = () => {
   return (
     <section id="services" className="py-20 md:py-28 relative overflow-hidden">
@@ -42,31 +70,38 @@ const ServicesSection = () => {
         {/* Header */}
         <motion.div
           className="text-center mb-14"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
         >
-          <p className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
+          <motion.p variants={fadeBlurUp} className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
             What We Offer
-          </p>
-          <h2 className="text-4xl md:text-5xl text-white">
+          </motion.p>
+          <motion.h2 variants={fadeBlurUp} className="text-4xl md:text-5xl text-white">
             Our Services
-          </h2>
+          </motion.h2>
         </motion.div>
 
-        {/* Cards Grid — 3 per row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Cards Grid — 3D perspective tilt */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 perspective-container">
           {services.map((s, i) => (
             <motion.div
               key={s.slug}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06, duration: 0.5 }}
+              variants={cardVariant(i)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-40px" }}
+              whileHover={{
+                y: -10,
+                rotateX: 2,
+                rotateY: -2,
+                transition: { type: "spring", stiffness: 300, damping: 20 },
+              }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               <Link to={`/services/${s.slug}`} className="group block">
-                <div className="relative rounded-xl overflow-hidden border border-border bg-card h-[320px] transition-all duration-500 hover:shadow-[0_16px_48px_hsl(var(--secondary)/0.15)]">
+                <div className="relative rounded-xl overflow-hidden border border-border bg-card h-[320px] transition-all duration-500 hover:shadow-[0_20px_60px_hsl(var(--secondary)/0.2)]">
                   <img
                     src={s.image}
                     alt={s.title}

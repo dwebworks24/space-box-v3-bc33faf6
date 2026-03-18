@@ -18,12 +18,15 @@ export default function SubBanner({ image, title, highlight, subtitle, height = 
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  const titleWords = title.split(' ');
+
   return (
     <section ref={heroRef} className="relative overflow-hidden" style={{ height: `${height}px` }}>
       <motion.div className="absolute inset-0" style={{ y: heroY, scale: heroScale }}>
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </motion.div>
 
+      {/* Animated shimmer sweep */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-transparent via-secondary/30 to-transparent"
         initial={{ x: '-100%' }}
@@ -40,20 +43,34 @@ export default function SubBanner({ image, title, highlight, subtitle, height = 
       >
         <motion.p
           className="text-white/80 text-xs uppercase tracking-[0.3em] mb-2 font-body"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.8, delay: 0.3, ease: easeOut }}
         >
           {subtitle || 'SpaceBox Concepts'}
         </motion.p>
-        <motion.h1
-          className="text-2xl md:text-3xl lg:text-4xl text-white leading-[0.95]"
-          initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 1, delay: 0.5, ease: easeOut }}
-        >
-          {title} <span className="text-white font-semibold">{highlight}</span>
-        </motion.h1>
+        <h1 className="text-2xl md:text-3xl lg:text-4xl text-white leading-[0.95]">
+          {titleWords.map((word, i) => (
+            <motion.span
+              key={i}
+              className="inline-block mr-[0.3em]"
+              initial={{ opacity: 0, y: 40, rotateX: -60 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 + i * 0.08, ease: easeOut }}
+              style={{ transformOrigin: "bottom", perspective: "500px" }}
+            >
+              {word}
+            </motion.span>
+          ))}
+          <motion.span
+            className="text-white font-semibold inline-block"
+            initial={{ opacity: 0, scale: 0.5, filter: "blur(10px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: 0.8, delay: 0.5 + titleWords.length * 0.08, ease: easeOut }}
+          >
+            {highlight}
+          </motion.span>
+        </h1>
       </motion.div>
     </section>
   );

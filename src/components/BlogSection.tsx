@@ -40,6 +40,17 @@ const textSlideUp = {
   },
 };
 
+const cardVariant = (i: number) => ({
+  hidden: { opacity: 0, y: 60, rotateX: -10, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    filter: "blur(0px)",
+    transition: { delay: i * 0.15, duration: 0.7, ease: easeOut },
+  },
+});
+
 const BlogSection = () => {
   const { data: allPosts = [], isLoading } = useQuery({
     queryKey: ["blogList"],
@@ -70,7 +81,7 @@ const BlogSection = () => {
             variants={fadeBlurUp}
             href="/blog"
             className="hidden md:inline-flex items-center gap-2 text-primary font-body font-medium hover:text-secondary transition-colors"
-            whileHover={{ x: 4 }}
+            whileHover={{ x: 6 }}
           >
             View All <ArrowRight className="w-4 h-4" />
           </motion.a>
@@ -90,16 +101,22 @@ const BlogSection = () => {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 perspective-container">
             {posts.map((post, i) => (
               <motion.div
                 key={post.id}
-                className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-[0_12px_40px_hsl(var(--secondary)/0.12)] hover:border-secondary/30 transition-all duration-500"
+                className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-[0_16px_48px_hsl(var(--secondary)/0.15)] hover:border-secondary/30 transition-all duration-500"
+                variants={cardVariant(i)}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ staggerChildren: 0.1, delayChildren: i * 0.18 }}
-                whileHover={{ y: -6 }}
+                whileHover={{
+                  y: -8,
+                  rotateX: 2,
+                  rotateY: -1,
+                  transition: { type: "spring", stiffness: 300, damping: 20 },
+                }}
+                style={{ transformStyle: "preserve-3d" }}
               >
                 <motion.div variants={imageReveal} className="overflow-hidden">
                   <img
@@ -154,7 +171,7 @@ const BlogSection = () => {
         >
           <a
             href="/blog"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-semibold uppercase tracking-wider text-sm hover:scale-[1.03] hover:-translate-y-0.5 active:scale-[0.97] hover:bg-secondary transition-all duration-300 shadow-md hover:shadow-xl"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-semibold uppercase tracking-wider text-sm hover:scale-[1.03] hover:-translate-y-0.5 active:scale-[0.97] hover:bg-secondary transition-all duration-300 shadow-md hover:shadow-xl shimmer"
           >
             View More <ArrowRight className="w-4 h-4" />
           </a>
