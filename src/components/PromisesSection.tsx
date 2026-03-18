@@ -76,9 +76,9 @@ const PromisesSection = () => {
           {promises.map((p, i) => (
             <motion.div
               key={p.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, delay: i * 0.08, ease: easeOut }}
               className="group"
             >
