@@ -121,6 +121,87 @@
   .clip-diagonal {
     clip-path: polygon(0 20%, 100% 0%, 100% 100%, 0% 100%);
   }
+
+  /* Shimmer sweep */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      hsl(var(--secondary) / 0.12) 45%,
+      hsl(var(--secondary) / 0.25) 50%,
+      hsl(var(--secondary) / 0.12) 55%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    animation: shimmer-sweep 3s ease-in-out infinite;
+  }
+  @keyframes shimmer-sweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* Glow pulse */
+  .glow-pulse {
+    animation: glow-pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 8px hsl(var(--secondary) / 0.2); }
+    50% { box-shadow: 0 0 24px hsl(var(--secondary) / 0.45); }
+  }
+
+  /* Magnetic tilt perspective container */
+  .perspective-container {
+    perspective: 800px;
+  }
+
+  /* Float animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  /* Gradient text animation */
+  .gradient-text-animate {
+    background: linear-gradient(90deg, hsl(var(--foreground)), hsl(var(--secondary)), hsl(var(--foreground)));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-slide 4s linear infinite;
+  }
+  @keyframes gradient-slide {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  /* Draw line */
+  .draw-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 2s ease-out forwards;
+  }
+  @keyframes draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* Blur-in text */
+  @keyframes blur-in {
+    0% { filter: blur(12px); opacity: 0; }
+    100% { filter: blur(0); opacity: 1; }
+  }
+  .animate-blur-in {
+    animation: blur-in 0.8s ease-out forwards;
+  }
 }
 
 @media (max-width: 480px) {
