@@ -2,16 +2,12 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Galaxy from "./Galaxy";
-import ImageReveal from "./animations/ImageReveal";
-import MagneticWrap from "./animations/MagneticWrap";
 import consultationImg from "@/assets/services/consultation.jpg";
 import designPlanningImg from "@/assets/services/design-planning.jpg";
 import spaceOptImg from "@/assets/services/space-optimization.jpg";
 import colourImg from "@/assets/services/colour-schemes.jpg";
 import qualityImg from "@/assets/services/quality.jpg";
 import projectMgmtImg from "@/assets/services/project-management.jpg";
-
-const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export const services = [
   { slug: "residential-interior-design", title: "Residential Interior Design", image: consultationImg, desc: "Transforming homes into personalised, functional living spaces.", fullDesc: "We design homes that reflect your personality and lifestyle. From cosy bedrooms to elegant living rooms, our residential interior design service covers space planning, material selection, furniture curation, and styling — creating warm, inviting spaces that feel uniquely yours. Every detail is crafted to balance aesthetics with everyday comfort." },
@@ -21,16 +17,6 @@ export const services = [
   { slug: "end-to-end-project-execution", title: "End-to-end Project Execution", image: projectMgmtImg, desc: "Complete project management from concept to move-in.", fullDesc: "We manage your entire project from initial concept through to final handover. Our end-to-end service includes vendor coordination, timeline management, on-site supervision, budget tracking, and quality inspections at every phase. With a single point of contact and regular progress updates, we deliver a stress-free experience and move-in ready spaces." },
   { slug: "quality-of-service", title: "Quality of Service", image: qualityImg, desc: "Snag correction, decor layering & meticulous finishing.", fullDesc: "Quality is at the heart of everything we do. Our meticulous approach includes thorough snag correction, precise decor layering, and attention to the finest finishing details. We conduct multiple quality checks throughout the project to ensure every element meets our exacting standards and your expectations." },
 ];
-
-const wordReveal = {
-  hidden: { y: "110%", rotate: 3, opacity: 0 },
-  visible: {
-    y: "0%",
-    rotate: 0,
-    opacity: 1,
-    transition: { duration: 0.9, ease: EASE_OUT },
-  },
-};
 
 const ServicesSection = () => {
   return (
@@ -53,56 +39,40 @@ const ServicesSection = () => {
         />
       </div>
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
-        {/* Header — split text reveal */}
-        <div className="text-center mb-14">
-          <motion.p
-            className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE_OUT }}
-          >
+        {/* Header */}
+        <motion.div
+          className="text-center mb-14"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <p className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
             What We Offer
-          </motion.p>
+          </p>
           <h2 className="text-4xl md:text-5xl text-white">
-            <motion.span
-              className="inline"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              transition={{ staggerChildren: 0.06, delayChildren: 0.2 }}
-            >
-              {"Our Services".split(" ").map((word, i) => (
-                <span key={i} className="inline-block overflow-hidden align-bottom">
-                  <motion.span className="inline-block" variants={wordReveal}>
-                    {word}{i < 1 ? "\u00A0" : ""}
-                  </motion.span>
-                </span>
-              ))}
-            </motion.span>
+            Our Services
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Cards Grid — image reveal on each */}
+        {/* Cards Grid — 3 per row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((s, i) => (
             <motion.div
               key={s.slug}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ delay: i * 0.08, duration: 0.7, ease: EASE_OUT }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06, duration: 0.5 }}
             >
               <Link to={`/services/${s.slug}`} className="group block">
                 <div className="relative rounded-xl overflow-hidden border border-border bg-card h-[320px] transition-all duration-500 hover:shadow-[0_16px_48px_hsl(var(--secondary)/0.15)]">
-                  <ImageReveal direction="up" delay={i * 0.1} duration={1} className="w-full h-full">
-                    <img
-                      src={s.image}
-                      alt={s.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                  </ImageReveal>
+                  <img
+                    src={s.image}
+                    alt={s.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-5 backdrop-blur-sm bg-black/20 border-t border-white/10">
                     <h3 className="text-white text-lg font-semibold leading-tight drop-shadow-md">

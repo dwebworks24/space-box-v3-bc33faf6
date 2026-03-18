@@ -1,17 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-const wordReveal = {
-  hidden: { y: "110%", rotate: 3, opacity: 0 },
-  visible: {
-    y: "0%",
-    rotate: 0,
-    opacity: 1,
-    transition: { duration: 0.9, ease: EASE_OUT },
-  },
-};
+const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 interface SubBannerProps {
   image: string;
@@ -28,19 +18,9 @@ export default function SubBanner({ image, title, highlight, subtitle, height = 
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const allWords = `${title} ${highlight}`.split(" ");
-  const titleWordCount = title.split(" ").length;
-
   return (
     <section ref={heroRef} className="relative overflow-hidden" style={{ height: `${height}px` }}>
-      {/* Image with cinematic scale-in */}
-      <motion.div
-        className="absolute inset-0"
-        style={{ y: heroY, scale: heroScale }}
-        initial={{ scale: 1.3 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 2, ease: [0.76, 0, 0.24, 1] }}
-      >
+      <motion.div className="absolute inset-0" style={{ y: heroY, scale: heroScale }}>
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </motion.div>
 
@@ -62,29 +42,18 @@ export default function SubBanner({ image, title, highlight, subtitle, height = 
           className="text-white/80 text-xs uppercase tracking-[0.3em] mb-2 font-body"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: EASE_OUT }}
+          transition={{ duration: 0.8, delay: 0.3 }}
         >
           {subtitle || 'SpaceBox Concepts'}
         </motion.p>
-        <h1 className="text-2xl md:text-3xl lg:text-4xl text-white leading-[0.95]">
-          <motion.span
-            className="inline"
-            initial="hidden"
-            animate="visible"
-            transition={{ staggerChildren: 0.05, delayChildren: 0.5 }}
-          >
-            {allWords.map((word, i) => (
-              <span key={i} className="inline-block overflow-hidden align-bottom">
-                <motion.span
-                  className={`inline-block ${i >= titleWordCount ? "font-semibold" : ""}`}
-                  variants={wordReveal}
-                >
-                  {word}{i < allWords.length - 1 ? "\u00A0" : ""}
-                </motion.span>
-              </span>
-            ))}
-          </motion.span>
-        </h1>
+        <motion.h1
+          className="text-2xl md:text-3xl lg:text-4xl text-white leading-[0.95]"
+          initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 1, delay: 0.5, ease: easeOut }}
+        >
+          {title} <span className="text-white font-semibold">{highlight}</span>
+        </motion.h1>
       </motion.div>
     </section>
   );

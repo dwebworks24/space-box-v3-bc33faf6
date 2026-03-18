@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import MagneticWrap from "./animations/MagneticWrap";
 
 import work1 from "@/assets/projects/work-1.png";
 import work2 from "@/assets/projects/work-2.png";
@@ -12,18 +11,6 @@ import work6 from "@/assets/projects/work-6.png";
 import work7 from "@/assets/projects/work-7.png";
 import work8 from "@/assets/projects/work-8.png";
 import work9 from "@/assets/projects/work-9.png";
-
-const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-const wordReveal = {
-  hidden: { y: "110%", rotate: 3, opacity: 0 },
-  visible: {
-    y: "0%",
-    rotate: 0,
-    opacity: 1,
-    transition: { duration: 0.9, ease: EASE_OUT },
-  },
-};
 
 const projects = [
   { img: work1, title: "Restaurant Lounge", category: "Commercial" },
@@ -37,7 +24,7 @@ const projects = [
   { img: work9, title: "Kids Play Zone", category: "Commercial" },
 ];
 
-const PROJECT_HEIGHT = 420;
+const PROJECT_HEIGHT = 420; // px per project visible area
 const GAP = 24;
 
 const OurWorkSection = () => {
@@ -51,6 +38,8 @@ const OurWorkSection = () => {
   }, []);
 
   const cardHeight = isMobile ? 240 : PROJECT_HEIGHT;
+
+  // Total scroll height = enough to scroll through all projects
   const totalScrollHeight = (projects.length) * (cardHeight + GAP);
 
   const { scrollYProgress } = useScroll({
@@ -58,10 +47,9 @@ const OurWorkSection = () => {
     offset: ["start start", "end end"],
   });
 
+  // Translate the project list upward as user scrolls
   const maxTranslate = (projects.length - 1) * (cardHeight + GAP);
   const translateY = useTransform(scrollYProgress, [0, 1], [0, -maxTranslate]);
-
-  const headlineWords = "Spaces We Designed".split(" ");
 
   return (
     <section
@@ -69,67 +57,36 @@ const OurWorkSection = () => {
       className="relative"
       style={{ height: `${totalScrollHeight + 100}px` }}
     >
+      {/* Sticky container that stays in view */}
       <div className="sticky top-0 h-screen overflow-hidden flex items-center pt-32 lg:pt-0">
         <div className="container mx-auto px-4 sm:px-6 md:px-10 lg:px-20">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-16 items-center">
-            {/* Left: Sticky text with split text reveal */}
+            {/* Left: Sticky text */}
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.7 }}
+              className=""
             >
-              <motion.p
-                className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 mt-8 sm:mt-0 font-body"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, ease: EASE_OUT }}
-              >
+              <p className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 mt-8 sm:mt-0 font-body">
                 Our Work
-              </motion.p>
+              </p>
               <h2 className="text-4xl md:text-5xl text-foreground leading-tight mt-4 sm:mt-0">
-                <motion.span
-                  className="inline"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  transition={{ staggerChildren: 0.07, delayChildren: 0.15 }}
-                >
-                  {headlineWords.map((word, i) => (
-                    <span key={i} className="inline-block overflow-hidden align-bottom">
-                      <motion.span className="inline-block" variants={wordReveal}>
-                        {word}{i < headlineWords.length - 1 ? "\u00A0" : ""}
-                      </motion.span>
-                    </span>
-                  ))}
-                </motion.span>
+                Spaces We 
+                <br />
+                Designed 
               </h2>
-              <motion.p
-                className="mt-6 text-muted-foreground font-body max-w-sm leading-relaxed"
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.4, ease: EASE_OUT }}
-              >
+              <p className="mt-6 text-muted-foreground font-body max-w-sm leading-relaxed">
                 Explore our completed projects in the form of Residential, Commercial, and Office Interior Designers in Telangana.
-              </motion.p>
+              </p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.5, ease: EASE_OUT }}
+              <a
+                href="/projects"
+                className="mt-8 inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-semibold uppercase tracking-wider text-sm hover:scale-[1.03] hover:-translate-y-0.5 active:scale-[0.97] hover:bg-secondary transition-all duration-300 shadow-md hover:shadow-xl"
               >
-                <MagneticWrap className="inline-block mt-8" strength={8}>
-                  <a
-                    href="/projects"
-                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-semibold uppercase tracking-wider text-sm hover:scale-[1.03] hover:-translate-y-0.5 active:scale-[0.97] hover:bg-secondary transition-all duration-300 shadow-md hover:shadow-xl"
-                  >
-                    View All Projects <ArrowRight className="w-4 h-4" />
-                  </a>
-                </MagneticWrap>
-              </motion.div>
+                View All Projects <ArrowRight className="w-4 h-4" />
+              </a>
 
               {/* Progress dots */}
               <div className="mt-10 flex gap-2">
@@ -139,7 +96,7 @@ const OurWorkSection = () => {
               </div>
             </motion.div>
 
-            {/* Right: Scrolling projects with image reveal */}
+            {/* Right: Scrolling projects */}
             <div className="relative h-[65vh] sm:h-[65vh] lg:h-[calc(100vh-120px)] overflow-hidden pb-10">
               <motion.div
                 style={{ y: translateY }}
@@ -147,17 +104,13 @@ const OurWorkSection = () => {
                 transition={{ type: "tween", ease: "linear" }}
               >
                 {projects.map((p, i) => (
-                  <motion.div
+                  <div
                     key={p.title}
                     className="group relative overflow-hidden rounded-sm"
                     style={{
                       height: `${cardHeight}px`,
                       marginBottom: i < projects.length - 1 ? `${GAP}px` : 0,
                     }}
-                    initial={{ clipPath: "inset(0 0 100% 0)" }}
-                    whileInView={{ clipPath: "inset(0 0 0% 0)" }}
-                    viewport={{ once: true, amount: 0.1 }}
-                    transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
                   >
                     <img
                       src={p.img}
@@ -175,7 +128,7 @@ const OurWorkSection = () => {
                         <h3 className="text-lg text-background mt-1">{p.title}</h3>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </motion.div>
             </div>
