@@ -2,7 +2,7 @@ import { motion, useInView, useSpring, useMotionValue, useTransform, useScroll }
 import { useRef, useEffect } from "react";
 import ctaBg from "@/assets/cta-bg.jpg";
 
-const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const stats = [
   { value: 75, suffix: "+", label: "Projects Completed" },
@@ -27,16 +27,16 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
 
 const containerVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
 };
 
 const statVariant = {
-  hidden: { opacity: 0, y: 40, scale: 0.8 },
+  hidden: { opacity: 0, y: 50, scale: 0.85 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.7, ease: easeOut },
+    transition: { duration: 0.8, ease: EASE_OUT },
   },
 };
 
@@ -44,7 +44,7 @@ const lineReveal = {
   hidden: { scaleX: 0 },
   visible: {
     scaleX: 1,
-    transition: { duration: 0.6, ease: easeOut, delay: 0.3 },
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] as [number, number, number, number], delay: 0.3 },
   },
 };
 
