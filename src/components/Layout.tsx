@@ -26,6 +26,7 @@ export default function Layout() {
         </main>
         <Footer />
         <FloatingButtons />
+        <MusicPlayer />
       </div>
     </div>
   );
