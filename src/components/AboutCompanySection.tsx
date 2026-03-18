@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import logo from "@/assets/space-box-logo.png";
 import aboutImg from "@/assets/about-us-img.png";
 
@@ -40,18 +41,25 @@ const revealLine = {
 };
 
 const imageReveal = {
-  hidden: { opacity: 0, x: 80, scale: 0.95 },
+  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)", scale: 1.05 },
   visible: {
     opacity: 1,
-    x: 0,
+    clipPath: "inset(0 0% 0 0)",
     scale: 1,
-    transition: { duration: 1, ease: easeOut },
+    transition: { duration: 1.2, ease: easeOut },
   },
 };
 
 const AboutCompanySection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
   return (
-    <section className="relative py-12 md:py-16 lg:py-24 overflow-hidden bg-background">
+    <section ref={sectionRef} className="relative py-12 md:py-16 lg:py-24 overflow-hidden bg-background">
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-6 items-center">
           {/* Content Column */}
@@ -99,17 +107,9 @@ const AboutCompanySection = () => {
             >
               We specialize in residential interior design, office interior design, and commercial interior projects with a focus on clarity, material quality, and disciplined project management.
             </motion.p>
-
-            {/* <motion.a
-              href="/about"
-              variants={slideUp}
-              className="mt-8 inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-semibold uppercase tracking-wider text-sm hover:scale-[1.03] hover:-translate-y-0.5 active:scale-[0.97] hover:bg-secondary transition-all duration-300 shadow-md hover:shadow-xl"
-            >
-              Know More
-            </motion.a> */}
           </motion.div>
 
-          {/* Image Column */}
+          {/* Image Column - parallax + clip-path reveal */}
           <motion.div
             variants={imageReveal}
             initial="hidden"
@@ -117,11 +117,12 @@ const AboutCompanySection = () => {
             viewport={{ once: true, margin: "-80px" }}
             className="flex items-center justify-center"
           >
-            <img
+            <motion.img
               src={aboutImg}
               alt="SpaceBox Concepts – Modern office interior"
               className="w-full max-w-lg lg:max-w-none rounded-2xl object-cover shadow-xl"
               loading="lazy"
+              style={{ y: imgY }}
             />
           </motion.div>
         </div>

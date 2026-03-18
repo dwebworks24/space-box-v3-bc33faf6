@@ -36,6 +36,22 @@ const promises = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 40, scale: 0.95, filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: easeOut },
+  },
+};
+
 const PromisesSection = () => {
   return (
     <section className="py-28 bg-background border-t border-border">
@@ -72,25 +88,37 @@ const PromisesSection = () => {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
-          {promises.map((p, i) => (
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {promises.map((p) => (
             <motion.div
               key={p.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.6, delay: i * 0.08, ease: easeOut }}
+              variants={cardVariant}
+              whileHover={{
+                y: -6,
+                x: 4,
+                transition: { type: "spring", stiffness: 300, damping: 20 },
+              }}
               className="group"
             >
               <div className="flex items-start gap-5">
-                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center border border-border group-hover:border-secondary transition-colors duration-500">
+                <motion.div
+                  className="flex-shrink-0 w-12 h-12 flex items-center justify-center border border-border group-hover:border-secondary group-hover:bg-secondary/10 transition-all duration-500"
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <p.icon
                     className="w-5 h-5 text-secondary transition-colors duration-500"
                     strokeWidth={1.5}
                   />
-                </div>
+                </motion.div>
                 <div>
-                  <h3 className="text-base text-foreground mb-2 tracking-wide">
+                  <h3 className="text-base text-foreground mb-2 tracking-wide group-hover:text-secondary transition-colors duration-300">
                     {p.title}
                   </h3>
                   <p className="text-sm text-muted-foreground font-body leading-relaxed">
@@ -100,7 +128,7 @@ const PromisesSection = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
