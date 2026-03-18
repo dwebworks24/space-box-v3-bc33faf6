@@ -301,7 +301,7 @@ export default function Galaxy({
       renderer.render({ scene: mesh });
     }
     animateId = requestAnimationFrame(update);
-    ctn.appendChild(gl.canvas);
+    // canvas already appended above
 
     function handleMouseMove(e: MouseEvent) {
       const rect = ctn.getBoundingClientRect();
