@@ -2,33 +2,39 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
-const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const wordReveal = {
+  hidden: { y: "110%", rotate: 3, opacity: 0 },
+  visible: {
+    y: "0%",
+    rotate: 0,
+    opacity: 1,
+    transition: { duration: 0.9, ease: EASE_OUT },
+  },
+};
 
 const testimonials = [
   {
     name: "Sunny Rav",
-    // role: "Director, Horizon Hotels",
     text: "Heartfelt Thanks to Spacebox Concepts, I wanted to take a moment to express my sincere gratitude for the incredible work you've done on my home. Even though I was in USA, I could already envision the beautiful transformations you've made. Your attention to detail and design expertise shine through in every corner, and I was surprised and overwhelmed to see everything in person. Thank you for bringing my vision to life and for making this process so enjoyable. Thanks again.",
     rating: 5,
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
   },
   {
     name: "Ashwin Debbadi",
-    // role: "CEO, TechVista Solutions",
     text: "Spectacular designs and exceptional execution with ease and stress free … all the best for your future endeavours.",
     rating: 5,
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
   },
   {
     name: "Shiva Krishna",
-    // role: "Homeowner",
     text: "Excellent 👌👌 …",
     rating: 5,
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face",
   },
 ];
 
-// Circle positions for floating avatars
 const circlePositions = [
   { top: '5%', left: '8%', size: 'w-16 h-16 md:w-20 md:h-20' },
   { top: '0%', left: '30%', size: 'w-14 h-14 md:w-16 md:h-16' },
@@ -55,10 +61,10 @@ const TestimonialsSection = () => {
                 key={i}
                 className={`absolute ${pos.size} rounded-full bg-gradient-to-br from-muted to-border overflow-hidden border-[3px] border-background shadow-lg`}
                 style={{ top: pos.top, left: pos.left }}
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0, rotate: -15 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.12, duration: 0.5, type: 'spring', stiffness: 200 }}
+                transition={{ delay: 0.2 + i * 0.1, duration: 0.8, ease: EASE_OUT }}
                 whileHover={{ scale: 1.1 }}
               >
                 <img
@@ -87,25 +93,33 @@ const TestimonialsSection = () => {
             </div>
           </div>
 
-          {/* Right - Testimonial content */}
+          {/* Right - Testimonial content with split text header */}
           <div>
-            <motion.h2
-              className="text-4xl md:text-5xl text-foreground mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: easeOut }}
-            >
-              People Love Us
-            </motion.h2>
+            <h2 className="text-4xl md:text-5xl text-foreground mb-8">
+              <motion.span
+                className="inline"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                transition={{ staggerChildren: 0.07, delayChildren: 0.1 }}
+              >
+                {"People Love Us".split(" ").map((word, i, arr) => (
+                  <span key={i} className="inline-block overflow-hidden align-bottom">
+                    <motion.span className="inline-block" variants={wordReveal}>
+                      {word}{i < arr.length - 1 ? "\u00A0" : ""}
+                    </motion.span>
+                  </span>
+                ))}
+              </motion.span>
+            </h2>
 
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
+                initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -20, filter: "blur(6px)" }}
+                transition={{ duration: 0.5, ease: EASE_OUT }}
               >
                 <div className="flex gap-1 mb-6">
                   {Array.from({ length: t.rating }).map((_, j) => (
@@ -118,12 +132,8 @@ const TestimonialsSection = () => {
                 </p>
 
                 <div className="flex items-center gap-4">
-                  {/* <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary/30">
-                    <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
-                  </div> */}
                   <div>
                     <p className="text-foreground font-semibold text-lg">{t.name}</p>
-                    {/* <p className="text-secondary text-sm font-body">{t.role || "Client"}</p> */}
                   </div>
                 </div>
               </motion.div>
