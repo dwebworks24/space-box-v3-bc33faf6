@@ -15,7 +15,7 @@ const stagger = {
 };
 
 const fadeBlurUp = {
-  hidden: { opacity: 0, y: 40, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 40, filter: "blur(8px)" },
   visible: {
     opacity: 1,
     y: 0,
@@ -25,12 +25,13 @@ const fadeBlurUp = {
 };
 
 const cardPop = (i: number) => ({
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
+  hidden: { opacity: 0, y: 60, scale: 0.8, rotateY: -15 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.6, delay: i * 0.15, ease: easeOut },
+    rotateY: 0,
+    transition: { duration: 0.7, delay: i * 0.15, ease: easeOut },
   },
 });
 
@@ -51,7 +52,7 @@ const TeamSection = () => {
             12+ In-house Designers, Design Managers, Execution Managers & Sales Managers driving innovation.
           </motion.p>
         </motion.div>
-        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto perspective-container">
           {team.map((t, i) => (
             <motion.div
               key={t.name}
@@ -59,16 +60,32 @@ const TeamSection = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              whileHover={{
+                y: -12,
+                rotateY: 5,
+                scale: 1.02,
+                transition: { type: "spring", stiffness: 300, damping: 15 },
+              }}
               className="flex flex-col items-center"
+              style={{ transformStyle: "preserve-3d" }}
             >
-              <motion.img
-                src={t.image}
-                alt={t.name}
-                className="w-28 h-28 rounded-full object-cover mb-4 shadow-lg"
-                whileHover={{ scale: 1.08 }}
+              <motion.div
+                className="relative mb-4"
+                whileHover={{ scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 300 }}
-              />
+              >
+                <img
+                  src={t.image}
+                  alt={t.name}
+                  className="w-28 h-28 rounded-full object-cover shadow-lg"
+                />
+                {/* Glow ring on hover */}
+                <motion.div
+                  className="absolute inset-0 rounded-full border-2 border-secondary/0"
+                  whileHover={{ borderColor: "hsl(var(--secondary) / 0.6)", scale: 1.15 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.div>
               <h3 className="text-lg font-semibold text-foreground font-body">{t.name}</h3>
               <p className="text-sm text-muted-foreground font-body mt-1">{t.role}</p>
             </motion.div>
