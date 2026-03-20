@@ -105,7 +105,7 @@ const BlogSection = () => {
             {posts.map((post, i) => (
               <motion.div
                 key={post.id}
-                className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-[0_16px_48px_hsl(var(--secondary)/0.15)] hover:border-secondary/30 transition-all duration-500"
+                className="group bg-white/10 backdrop-blur-sm border border-white/15 rounded-xl overflow-hidden hover:shadow-[0_16px_48px_hsl(var(--secondary)/0.25)] hover:border-secondary/30 transition-all duration-500"
                 variants={cardVariant(i)}
                 initial="hidden"
                 whileInView="visible"
