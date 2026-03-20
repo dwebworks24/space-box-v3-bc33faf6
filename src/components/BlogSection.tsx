@@ -70,7 +70,7 @@ const BlogSection = () => {
           viewport={{ once: true, margin: "-80px" }}
         >
           <div>
-            <motion.p variants={fadeBlurUp} className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
+            <motion.p variants={fadeBlurUp} className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body" style={{color: 'hsl(var(--secondary))'}}>
               Insights
             </motion.p>
             <motion.h2 variants={fadeBlurUp} className="text-4xl md:text-5xl text-foreground">
