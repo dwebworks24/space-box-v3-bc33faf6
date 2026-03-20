@@ -142,7 +142,7 @@ const BlogSection = () => {
                       })}
                     </span>
                   </motion.div>
-                  <motion.h3 variants={textSlideUp} className="text-xl text-foreground group-hover:text-primary transition-colors duration-300 mb-2">
+                  <motion.h3 variants={textSlideUp} className="text-xl text-white group-hover:text-secondary transition-colors duration-300 mb-2">
                     {post.title}
                   </motion.h3>
                   <motion.p variants={textSlideUp} className="text-sm text-muted-foreground font-body leading-relaxed mb-5">
