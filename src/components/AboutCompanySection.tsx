@@ -41,12 +41,12 @@ const revealLine = {
 };
 
 const imageReveal = {
-  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)", scale: 1.05 },
+  hidden: { opacity: 0, scale: 1.05, x: 60 },
   visible: {
     opacity: 1,
-    clipPath: "inset(0 0% 0 0)",
     scale: 1,
-    transition: { duration: 1.2, ease: easeOut },
+    x: 0,
+    transition: { duration: 1, ease: easeOut },
   },
 };
 
