@@ -73,7 +73,7 @@ const PromisesSection = () => {
               <br />
               Stand By
             </h2>
-            <p className="text-muted-foreground font-body max-w-sm text-sm leading-relaxed pb-1">
+            <p className="text-white/60 font-body max-w-sm text-sm leading-relaxed pb-1">
               We deliver reliable interior design services across Telangana with accountability at every stage.
             </p>
           </div>
