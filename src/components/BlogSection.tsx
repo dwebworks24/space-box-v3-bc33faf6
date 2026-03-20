@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -40,18 +41,8 @@ const textSlideUp = {
   },
 };
 
-const cardVariant = (i: number) => ({
-  hidden: { opacity: 0, y: 60, rotateX: -10, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    filter: "blur(0px)",
-    transition: { delay: i * 0.15, duration: 0.7, ease: easeOut },
-  },
-});
-
 const BlogSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const { data: allPosts = [], isLoading } = useQuery({
     queryKey: ["blogList"],
     queryFn: fetchBlogList,
@@ -59,32 +50,45 @@ const BlogSection = () => {
 
   const posts = allPosts.slice(0, 3);
 
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const headerY = useTransform(scrollYProgress, [0, 1], [50, -30]);
+  const card1Y = useTransform(scrollYProgress, [0, 1], [60, -20]);
+  const card2Y = useTransform(scrollYProgress, [0, 1], [100, -40]);
+  const card3Y = useTransform(scrollYProgress, [0, 1], [40, -15]);
+  const cardYs = [card1Y, card2Y, card3Y];
+
   return (
-    <section className="py-24">
+    <section ref={sectionRef} className="py-24 overflow-hidden">
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
-        <motion.div
-          className="flex items-end justify-between mb-16"
-          variants={headerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-        >
-          <div>
-            <motion.p variants={fadeBlurUp} className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
-              Insights
-            </motion.p>
-            <motion.h2 variants={fadeBlurUp} className="text-4xl md:text-5xl text-foreground">
-              Latest Blogs
-            </motion.h2>
-          </div>
-          <motion.a
-            variants={fadeBlurUp}
-            href="/blog"
-            className="hidden md:inline-flex items-center gap-2 text-primary font-body font-medium hover:text-secondary transition-colors"
-            whileHover={{ x: 6 }}
+        <motion.div style={{ y: headerY }}>
+          <motion.div
+            className="flex items-end justify-between mb-16"
+            variants={headerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
           >
-            View All <ArrowRight className="w-4 h-4" />
-          </motion.a>
+            <div>
+              <motion.p variants={fadeBlurUp} className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
+                Insights
+              </motion.p>
+              <motion.h2 variants={fadeBlurUp} className="text-4xl md:text-5xl text-foreground">
+                Latest Blogs
+              </motion.h2>
+            </div>
+            <motion.a
+              variants={fadeBlurUp}
+              href="/blog"
+              className="hidden md:inline-flex items-center gap-2 text-primary font-body font-medium hover:text-secondary transition-colors"
+              whileHover={{ x: 6 }}
+            >
+              View All <ArrowRight className="w-4 h-4" />
+            </motion.a>
+          </motion.div>
         </motion.div>
 
         {isLoading ? (
@@ -105,10 +109,16 @@ const BlogSection = () => {
             {posts.map((post, i) => (
               <motion.div
                 key={post.id}
+                style={{ y: cardYs[i] }}
                 className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-[0_16px_48px_hsl(var(--secondary)/0.15)] hover:border-secondary/30 transition-all duration-500"
-                variants={cardVariant(i)}
-                initial="hidden"
-                whileInView="visible"
+                initial={{ opacity: 0, y: 60, rotateX: -10, filter: "blur(4px)" }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                  rotateX: 0,
+                  filter: "blur(0px)",
+                  transition: { delay: i * 0.15, duration: 0.7, ease: easeOut },
+                }}
                 viewport={{ once: true, margin: "-60px" }}
                 whileHover={{
                   y: -8,
@@ -116,7 +126,6 @@ const BlogSection = () => {
                   rotateY: -1,
                   transition: { type: "spring", stiffness: 300, damping: 20 },
                 }}
-                style={{ transformStyle: "preserve-3d" }}
               >
                 <motion.div variants={imageReveal} className="overflow-hidden">
                   <img
