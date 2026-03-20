@@ -31,7 +31,6 @@ export default function ParallaxSection({
     offset: ["start start", "end start"],
   });
 
-  // Reduce effect intensity on mobile for performance
   const mobileScale = isMobile ? scaleAmount * 0.4 : scaleAmount;
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1 - mobileScale]);
   const opacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1, fadeOut ? (isMobile ? 0.8 : 0.6) : 1]);
@@ -46,23 +45,20 @@ export default function ParallaxSection({
   }
 
   return (
-    <div ref={ref} className={`relative ${className}`} style={{ zIndex }}>
-      {/* Sticky inner container that stays in view while parent scrolls */}
-      <div className="sticky top-0">
-        <motion.div
-          style={{
-            scale,
-            opacity,
-            borderRadius,
-            transformOrigin: "center center",
-            overflow: "hidden",
-            willChange: "transform, opacity",
-            boxShadow: "0 -8px 30px -5px rgba(0,0,0,0.12), 0 -2px 6px -2px rgba(0,0,0,0.06)",
-          }}
-        >
-          {children}
-        </motion.div>
-      </div>
+    <div ref={ref} className={`sticky top-0 ${className}`} style={{ zIndex }}>
+      <motion.div
+        style={{
+          scale,
+          opacity,
+          borderRadius,
+          transformOrigin: "center center",
+          overflow: "hidden",
+          willChange: "transform, opacity",
+          boxShadow: "0 -8px 30px -5px rgba(0,0,0,0.12), 0 -2px 6px -2px rgba(0,0,0,0.06)",
+        }}
+      >
+        {children}
+      </motion.div>
     </div>
   );
 }
