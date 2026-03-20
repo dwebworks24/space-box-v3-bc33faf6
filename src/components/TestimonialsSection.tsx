@@ -55,8 +55,14 @@ const TestimonialsSection = () => {
   const prev = () => setActive((i) => (i - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, hsl(30, 30%, 94%), hsl(25, 35%, 90%))' }}>
-      <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
+    <section className="py-24 relative overflow-hidden bg-background">
+      {/* Dark background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80)' }}
+      />
+      <div className="absolute inset-0 bg-foreground/85" />
+      <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[500px]">
           {/* Left - Floating avatar circles with continuous float */}
           <div className="relative h-[400px] md:h-[500px] hidden md:block">
@@ -111,7 +117,7 @@ const TestimonialsSection = () => {
           {/* Right - Testimonial content */}
           <div>
             <motion.h2
-              className="text-4xl md:text-5xl text-foreground mb-8"
+              className="text-4xl md:text-5xl text-white mb-8"
               initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true }}
@@ -141,13 +147,13 @@ const TestimonialsSection = () => {
                   ))}
                 </div>
 
-                <p className="text-muted-foreground font-body leading-relaxed text-lg mb-8">
+                <p className="text-white/70 font-body leading-relaxed text-lg mb-8">
                   "{t.text}"
                 </p>
 
                 <div className="flex items-center gap-4">
                   <div>
-                    <p className="text-foreground font-semibold text-lg">{t.name}</p>
+                    <p className="text-white font-semibold text-lg">{t.name}</p>
                   </div>
                 </div>
               </motion.div>
@@ -157,11 +163,11 @@ const TestimonialsSection = () => {
             <div className="flex items-center gap-4 mt-10">
               <motion.button
                 onClick={prev}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-secondary transition-colors"
+                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-secondary transition-colors"
                 whileHover={{ scale: 1.1, x: -2 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <ChevronLeft className="w-4 h-4 text-foreground" />
+                <ChevronLeft className="w-4 h-4 text-white" />
               </motion.button>
               <div className="flex gap-2 md:hidden">
                 {testimonials.map((_, i) => (
@@ -174,11 +180,11 @@ const TestimonialsSection = () => {
               </div>
               <motion.button
                 onClick={next}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-secondary transition-colors"
+                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-secondary transition-colors"
                 whileHover={{ scale: 1.1, x: 2 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <ChevronRight className="w-4 h-4 text-foreground" />
+                <ChevronRight className="w-4 h-4 text-white" />
               </motion.button>
             </div>
           </div>
