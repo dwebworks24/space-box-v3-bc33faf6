@@ -167,7 +167,7 @@ const TestimonialsSection = () => {
                 whileHover={{ scale: 1.1, x: -2 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <ChevronLeft className="w-4 h-4 text-foreground" />
+                <ChevronLeft className="w-4 h-4 text-white" />
               </motion.button>
               <div className="flex gap-2 md:hidden">
                 {testimonials.map((_, i) => (
