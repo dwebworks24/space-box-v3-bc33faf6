@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Galaxy from "./Galaxy";
@@ -36,22 +35,20 @@ const fadeBlurUp = {
   },
 };
 
+const cardVariant = (i: number) => ({
+  hidden: { opacity: 0, y: 60, scale: 0.9, rotateY: -8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    rotateY: 0,
+    transition: { delay: i * 0.08, duration: 0.7, ease: easeOut },
+  },
+});
+
 const ServicesSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Different parallax speeds for cards based on column position
-  const headerY = useTransform(scrollYProgress, [0, 1], [60, -40]);
-  const col1Y = useTransform(scrollYProgress, [0, 1], [80, -30]);
-  const col2Y = useTransform(scrollYProgress, [0, 1], [120, -50]);
-  const col3Y = useTransform(scrollYProgress, [0, 1], [60, -20]);
-  const colSpeeds = [col1Y, col2Y, col3Y, col1Y, col2Y, col3Y];
-
   return (
-    <section ref={sectionRef} id="services" className="py-20 md:py-28 relative overflow-hidden">
+    <section id="services" className="py-20 md:py-28 relative overflow-hidden">
       {/* Galaxy background */}
       <div className="absolute inset-0 z-0">
         <Galaxy
@@ -70,48 +67,41 @@ const ServicesSection = () => {
         />
       </div>
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
-        {/* Header with parallax */}
+        {/* Header */}
         <motion.div
           className="text-center mb-14"
-          style={{ y: headerY }}
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
         >
-          <motion.div
-            variants={headerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <motion.p variants={fadeBlurUp} className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
-              What We Offer
-            </motion.p>
-            <motion.h2 variants={fadeBlurUp} className="text-4xl md:text-5xl text-white">
-              Our Services
-            </motion.h2>
-          </motion.div>
+          <motion.p variants={fadeBlurUp} className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
+            What We Offer
+          </motion.p>
+          <motion.h2 variants={fadeBlurUp} className="text-4xl md:text-5xl text-white">
+            Our Services
+          </motion.h2>
         </motion.div>
 
-        {/* Cards Grid — each card has different parallax speed */}
+        {/* Cards Grid — 3D perspective tilt */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 perspective-container">
           {services.map((s, i) => (
             <motion.div
               key={s.slug}
-              initial={{ opacity: 0, scale: 0.9, rotateY: -8 }}
-              whileInView={{
-                opacity: 1,
-                scale: 1,
-                rotateY: 0,
-                transition: { delay: i * 0.08, duration: 0.7, ease: easeOut },
-              }}
+              variants={cardVariant(i)}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: "-40px" }}
               whileHover={{
+                y: -10,
                 rotateX: 2,
                 rotateY: -2,
                 transition: { type: "spring", stiffness: 300, damping: 20 },
               }}
-              style={{ y: colSpeeds[i], transformStyle: "preserve-3d" }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               <Link to={`/services/${s.slug}`} className="group block">
-                <div className="relative rounded-xl overflow-hidden border border-border bg-card h-[320px] transition-all duration-500 hover:shadow-[0_20px_60px_hsl(var(--secondary)/0.2)]" style={{ transformStyle: "preserve-3d" }}>
+                <div className="relative rounded-xl overflow-hidden border border-border bg-card h-[320px] transition-all duration-500 hover:shadow-[0_20px_60px_hsl(var(--secondary)/0.2)]">
                   <img
                     src={s.image}
                     alt={s.title}

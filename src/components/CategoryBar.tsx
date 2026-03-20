@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { Building2, Home, Monitor, Hotel, UtensilsCrossed, TreePine, Coffee } from "lucide-react";
 
 const categories = [
@@ -31,15 +30,8 @@ const itemVariants = {
 };
 
 const CategoryBar = () => {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const x = useTransform(scrollYProgress, [0, 1], [40, -40]);
-
   return (
-    <section ref={ref} className="bg-card border-b border-border overflow-hidden">
+    <section className="bg-card border-b border-border">
       <div className="container mx-auto px-4 sm:px-6 md:px-16">
         <motion.div
           className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-12 lg:gap-16 py-6 md:py-8"
@@ -47,7 +39,6 @@ const CategoryBar = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
-          style={{ x }}
         >
           {categories.map((cat) => (
             <motion.div
