@@ -95,18 +95,15 @@ const ServicesSection = () => {
           {services.map((s, i) => (
             <motion.div
               key={s.slug}
-              style={{ y: colSpeeds[i] }}
-              initial={{ opacity: 0, y: 60, scale: 0.9, rotateY: -8 }}
+              initial={{ opacity: 0, scale: 0.9, rotateY: -8 }}
               whileInView={{
                 opacity: 1,
-                y: 0,
                 scale: 1,
                 rotateY: 0,
                 transition: { delay: i * 0.08, duration: 0.7, ease: easeOut },
               }}
               viewport={{ once: true, margin: "-40px" }}
               whileHover={{
-                y: -10,
                 rotateX: 2,
                 rotateY: -2,
                 transition: { type: "spring", stiffness: 300, damping: 20 },
