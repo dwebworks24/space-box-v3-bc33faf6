@@ -21,8 +21,9 @@ const Index = () => {
         keywords="interior design, custom interiors, Telangana, Hyderabad, residential interior, commercial interior, SpaceBox Concepts, home design, office design"
       />
 
-      {/* Hero — no parallax wrap needed, it has its own scroll effects */}
-      <HeroSection />
+      <ParallaxSection zIndex={1}>
+        <HeroSection />
+      </ParallaxSection>
 
       <ParallaxSection zIndex={2}>
         <CategoryBar />
