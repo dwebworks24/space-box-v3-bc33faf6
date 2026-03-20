@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
 import logo from "@/assets/space-box-logo.png";
 import aboutImg from "@/assets/about-us-img.png";
@@ -41,25 +41,18 @@ const revealLine = {
 };
 
 const imageReveal = {
-  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)", scale: 1.05 },
+  hidden: { opacity: 0, scale: 1.05, x: 60 },
   visible: {
     opacity: 1,
-    clipPath: "inset(0 0% 0 0)",
     scale: 1,
-    transition: { duration: 1.2, ease: easeOut },
+    x: 0,
+    transition: { duration: 1, ease: easeOut },
   },
 };
 
 const AboutCompanySection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const imgY = useTransform(scrollYProgress, [0, 1], [40, -40]);
-
   return (
-    <section ref={sectionRef} className="relative py-12 md:py-16 lg:py-24 overflow-hidden bg-[hsl(35,45%,93%)]">
+    <section className="relative py-12 md:py-16 lg:py-24 overflow-hidden bg-[hsl(35,45%,93%)]">
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-6 items-center">
           {/* Content Column */}
@@ -121,8 +114,6 @@ const AboutCompanySection = () => {
               src={aboutImg}
               alt="SpaceBox Concepts – Modern office interior"
               className="w-full max-w-lg lg:max-w-none rounded-2xl object-cover shadow-xl"
-              loading="lazy"
-              style={{ y: imgY }}
             />
           </motion.div>
         </div>
