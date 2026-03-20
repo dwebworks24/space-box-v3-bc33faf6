@@ -193,9 +193,13 @@ function StageCard({
   return (
     <motion.div
       style={{
+        x: isHovered ? 0 : cardTranslateX,
+        rotateY: isHovered ? 0 : cardRotateY,
         scale: isHovered ? 1 : cardScale,
         opacity: isHovered ? 1 : cardOpacity,
+        perspective: 800,
       }}
+      transition={{ type: "spring", stiffness: 200, damping: 25 }}
       className="w-[260px] md:w-[380px] min-w-[260px] md:min-w-[380px] h-[280px] md:h-[360px] group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
