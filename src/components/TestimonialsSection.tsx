@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -44,8 +44,17 @@ const floatVariants = [
 const TestimonialsSection = () => {
   const [active, setActive] = useState(0);
   const t = testimonials[active];
+  const sectionRef = useRef<HTMLElement>(null);
 
-  // Auto-advance
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const leftY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const rightY = useTransform(scrollYProgress, [0, 1], [40, -30]);
+  const sectionScale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.96, 1, 1, 0.96]);
+
   useEffect(() => {
     const timer = setInterval(() => setActive((i) => (i + 1) % testimonials.length), 6000);
     return () => clearInterval(timer);
@@ -55,11 +64,11 @@ const TestimonialsSection = () => {
   const prev = () => setActive((i) => (i - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="py-24 bg-muted">
+    <motion.section ref={sectionRef} className="py-24 bg-muted overflow-hidden" style={{ scale: sectionScale }}>
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[500px]">
-          {/* Left - Floating avatar circles with continuous float */}
-          <div className="relative h-[400px] md:h-[500px] hidden md:block">
+          {/* Left - Floating avatars with parallax */}
+          <motion.div className="relative h-[400px] md:h-[500px] hidden md:block" style={{ y: leftY }}>
             {circlePositions.map((pos, i) => (
               <motion.div
                 key={i}
@@ -70,9 +79,6 @@ const TestimonialsSection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.12, duration: 0.6, type: 'spring', stiffness: 200 }}
                 whileHover={{ scale: 1.15, zIndex: 10 }}
-                animate={floatVariants[i]}
-                // @ts-ignore
-                transition2={{ repeat: Infinity, duration: 4 + i * 0.5, ease: "easeInOut" }}
               >
                 <motion.div
                   animate={floatVariants[i]}
@@ -88,7 +94,6 @@ const TestimonialsSection = () => {
               </motion.div>
             ))}
 
-            {/* Vertical timeline dots */}
             <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col items-center gap-6">
               <div className="w-[1px] h-16 bg-border" />
               {testimonials.map((_, i) => (
@@ -106,10 +111,10 @@ const TestimonialsSection = () => {
               ))}
               <div className="w-[1px] h-16 bg-border" />
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right - Testimonial content */}
-          <div>
+          {/* Right - Content with parallax */}
+          <motion.div style={{ y: rightY }}>
             <motion.h2
               className="text-4xl md:text-5xl text-foreground mb-8"
               initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
@@ -153,7 +158,6 @@ const TestimonialsSection = () => {
               </motion.div>
             </AnimatePresence>
 
-            {/* Mobile nav dots + arrows */}
             <div className="flex items-center gap-4 mt-10">
               <motion.button
                 onClick={prev}
@@ -181,10 +185,10 @@ const TestimonialsSection = () => {
                 <ChevronRight className="w-4 h-4 text-foreground" />
               </motion.button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
