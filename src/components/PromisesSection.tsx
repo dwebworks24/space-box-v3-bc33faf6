@@ -108,7 +108,7 @@ const PromisesSection = () => {
             >
               <div className="flex items-start gap-5">
                 <motion.div
-                  className="flex-shrink-0 w-12 h-12 flex items-center justify-center border border-border group-hover:border-secondary group-hover:bg-secondary/10 transition-all duration-500"
+                  className="flex-shrink-0 w-12 h-12 flex items-center justify-center border border-white/20 group-hover:border-secondary group-hover:bg-secondary/10 transition-all duration-500"
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
