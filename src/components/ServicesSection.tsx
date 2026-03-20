@@ -48,7 +48,7 @@ const cardVariant = (i: number) => ({
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="py-20 md:py-28 relative overflow-hidden">
+    <section id="services" className="py-20 md:py-28 relative overflow-hidden bg-foreground">
       {/* Galaxy background */}
       <div className="absolute inset-0 z-0">
         <Galaxy
