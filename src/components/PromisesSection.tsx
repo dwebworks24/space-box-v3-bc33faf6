@@ -54,7 +54,7 @@ const cardVariant = {
 
 const PromisesSection = () => {
   return (
-    <section className="py-28 bg-background border-t border-border">
+    <section className="py-28 bg-[hsl(220,20%,12%)] border-t border-white/10">
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
         {/* Header */}
         <motion.div
