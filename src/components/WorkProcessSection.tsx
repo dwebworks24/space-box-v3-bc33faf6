@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { ClipboardList, Palette, LayoutGrid, Box, ShoppingBag, HardHat, CheckCircle, HandshakeIcon } from "lucide-react";
+import AnimatedTitle from "./AnimatedTitle";
 import ctaBg from "@/assets/cta-bg.jpg";
 
 const stages = [
@@ -70,10 +71,9 @@ const WorkProcessSection = () => {
                 <p className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
                   Our Process
                 </p>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
-                  Project<br />
-                  <span>Stages</span>
-                </h2>
+                <AnimatedTitle className="text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
+                  Project Stages
+                </AnimatedTitle>
               </div>
 
               {/* Progress indicator */}

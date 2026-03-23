@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Shield, Clock, Gem, Handshake, Leaf, HeartHandshake } from "lucide-react";
+import AnimatedTitle from "./AnimatedTitle";
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -68,11 +69,9 @@ const PromisesSection = () => {
             Our Commitment
           </p>
           <div className="flex items-end justify-between gap-8 flex-wrap">
-            <h2 className="text-4xl md:text-5xl text-white leading-tight max-w-md">
-              Promises We
-              <br />
-              Stand By
-            </h2>
+            <AnimatedTitle className="text-4xl md:text-5xl text-white leading-tight max-w-md">
+              Promises We Stand By
+            </AnimatedTitle>
             <p className="text-white/60 font-body max-w-sm text-sm leading-relaxed pb-1">
               We deliver reliable interior design services across Telangana with accountability at every stage.
             </p>

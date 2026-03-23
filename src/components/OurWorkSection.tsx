@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import AnimatedTitle from "./AnimatedTitle";
 import sectionShape from "@/assets/section-shape-1.png";
 import circleShape1 from "@/assets/site-footer-two-shape-1.png";
 
@@ -80,11 +81,9 @@ const OurWorkSection = () => {
               <p className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 mt-8 sm:mt-0 font-body">
                 Our Work
               </p>
-              <h2 className="text-4xl md:text-5xl text-white leading-tight mt-4 sm:mt-0">
-                Spaces We 
-                <br />
-                Designed 
-              </h2>
+              <AnimatedTitle className="text-4xl md:text-5xl text-white leading-tight mt-4 sm:mt-0">
+                Spaces We Designed
+              </AnimatedTitle>
               <p className="mt-6 text-white/60 font-body max-w-sm leading-relaxed">
                 Explore our completed projects in the form of Residential, Commercial, and Office Interior Designers in Telangana.
               </p>
