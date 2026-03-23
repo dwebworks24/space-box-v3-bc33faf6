@@ -1,10 +1,12 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import AnimatedTitle from "./AnimatedTitle";
 import logo from "@/assets/space-box-logo.png";
 import aboutImg from "@/assets/about-us-img.png";
 import shapeImg from "@/assets/about-v1-shape1.png";
 import circleShape1 from "@/assets/site-footer-two-shape-1.png";
 import circleShape2 from "@/assets/site-footer-two-shape-2.png";
+import sectionShape from "@/assets/section-shape-1.png";
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -54,49 +56,83 @@ const imageReveal = {
 };
 
 const AboutCompanySection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const shapeY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
+  const shapeRotate = useTransform(scrollYProgress, [0, 1], [-15, 15]);
+  const circle1Y = useTransform(scrollYProgress, [0, 1], ["10%", "-15%"]);
+  const circle2Y = useTransform(scrollYProgress, [0, 1], ["-10%", "20%"]);
+  const sectionShapeX = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]);
+
   return (
-    <section className="relative py-12 md:py-16 lg:py-24 overflow-hidden bg-foreground">
-      {/* Geometric wireframe shape - top left */}
+    <section ref={sectionRef} className="relative py-12 md:py-16 lg:py-24 overflow-hidden bg-foreground">
+      {/* Full-width background texture */}
+      <div className="absolute inset-0 pointer-events-none">
+        <img
+          src={sectionShape}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.06]"
+        />
+      </div>
+
+      {/* Geometric wireframe shape - top left — now larger & more visible with parallax */}
       <motion.img
         src={shapeImg}
         alt=""
-        className="absolute top-0 left-0 w-[300px] lg:w-[400px] opacity-[0.06] pointer-events-none"
-        initial={{ opacity: 0, rotate: -10 }}
-        whileInView={{ opacity: 0.06, rotate: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, ease: easeOut }}
+        className="absolute -top-10 -left-10 w-[400px] lg:w-[550px] pointer-events-none"
+        style={{ y: shapeY, rotate: shapeRotate, opacity: 0.18 }}
       />
 
-      {/* Circle shapes - decorative */}
+      {/* Circle shapes - decorative — larger, brighter, parallax */}
       <motion.img
         src={circleShape1}
         alt=""
-        className="absolute bottom-0 left-0 w-[200px] lg:w-[280px] opacity-[0.08] pointer-events-none"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 0.08 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2, delay: 0.3 }}
+        className="absolute -bottom-10 -left-10 w-[300px] lg:w-[420px] pointer-events-none"
+        style={{ y: circle1Y, opacity: 0.2 }}
       />
       <motion.img
         src={circleShape2}
         alt=""
-        className="absolute top-0 right-0 w-[200px] lg:w-[280px] opacity-[0.08] pointer-events-none"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 0.08 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2, delay: 0.5 }}
+        className="absolute -top-10 -right-10 w-[300px] lg:w-[420px] pointer-events-none"
+        style={{ y: circle2Y, opacity: 0.2 }}
+      />
+
+      {/* Extra section shape - right side mid */}
+      <motion.img
+        src={sectionShape}
+        alt=""
+        className="absolute top-[30%] -right-20 w-[350px] lg:w-[500px] pointer-events-none opacity-[0.08] rotate-180"
+        style={{ x: sectionShapeX }}
       />
 
       {/* Floating geometric accents */}
       <motion.div
-        className="absolute top-[15%] right-[8%] w-16 h-16 border border-secondary/15 rotate-45 pointer-events-none hidden lg:block"
-        animate={{ y: [0, -12, 0], rotate: [45, 50, 45] }}
+        className="absolute top-[15%] right-[8%] w-20 h-20 border-2 border-secondary/25 rotate-45 pointer-events-none hidden lg:block"
+        animate={{ y: [0, -16, 0], rotate: [45, 52, 45] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-[20%] left-[5%] w-10 h-10 border border-secondary/20 rotate-45 pointer-events-none hidden lg:block"
-        animate={{ y: [0, 10, 0], rotate: [45, 40, 45] }}
+        className="absolute bottom-[20%] left-[5%] w-14 h-14 border-2 border-secondary/30 rotate-45 pointer-events-none hidden lg:block"
+        animate={{ y: [0, 12, 0], rotate: [45, 38, 45] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
+      <motion.div
+        className="absolute top-[60%] right-[15%] w-8 h-8 bg-secondary/10 rotate-45 pointer-events-none hidden lg:block"
+        animate={{ y: [0, -10, 0], scale: [1, 1.2, 1] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      />
+
+      {/* Dot grid pattern */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{
+          backgroundImage: "radial-gradient(circle, hsl(var(--secondary)) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
       />
 
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">

@@ -57,9 +57,21 @@ const cardVariant = {
 };
 
 const PromisesSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const shapeY = useTransform(scrollYProgress, [0, 1], ["15%", "-15%"]);
+  const circleY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
   return (
-    <section className="py-28 bg-[hsl(220,20%,12%)] border-t border-white/10">
-      <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
+    <section ref={sectionRef} className="py-28 bg-[hsl(220,20%,12%)] border-t border-white/10 relative overflow-hidden">
+      {/* Background decorative shapes */}
+      <motion.img src={shapeImg} alt="" className="absolute -top-16 -right-16 w-[400px] lg:w-[500px] pointer-events-none opacity-[0.15] rotate-180" style={{ y: shapeY }} />
+      <motion.img src={circleShape2} alt="" className="absolute -bottom-16 -left-10 w-[280px] lg:w-[380px] pointer-events-none opacity-[0.15]" style={{ y: circleY }} />
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{ backgroundImage: "radial-gradient(circle, hsl(var(--secondary)) 1px, transparent 1px)", backgroundSize: "50px 50px" }}
+      />
+      <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
         {/* Header */}
         <motion.div
           className="mb-20"
