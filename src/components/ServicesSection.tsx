@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import AnimatedTitle from "./AnimatedTitle";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight, Home, Building2, LayoutGrid, Palette, FolderKanban, BadgeCheck } from "lucide-react";
 import Galaxy from "./Galaxy";
 import consultationImg from "@/assets/services/consultation.jpg";
 import designPlanningImg from "@/assets/services/design-planning.jpg";
@@ -9,6 +9,8 @@ import spaceOptImg from "@/assets/services/space-optimization.jpg";
 import colourImg from "@/assets/services/colour-schemes.jpg";
 import qualityImg from "@/assets/services/quality.jpg";
 import projectMgmtImg from "@/assets/services/project-management.jpg";
+
+const serviceIcons = [Home, Building2, LayoutGrid, Palette, FolderKanban, BadgeCheck];
 
 export const services = [
   { slug: "residential-interior-design", title: "Residential Interior Design", image: consultationImg, desc: "Transforming homes into personalised, functional living spaces.", fullDesc: "We design homes that reflect your personality and lifestyle. From cosy bedrooms to elegant living rooms, our residential interior design service covers space planning, material selection, furniture curation, and styling — creating warm, inviting spaces that feel uniquely yours. Every detail is crafted to balance aesthetics with everyday comfort." },
@@ -21,29 +23,13 @@ export const services = [
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-const headerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
-const fadeBlurUp = {
-  hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
+const cardVariant = (i: number) => ({
+  hidden: { opacity: 0, y: 50, filter: "blur(6px)" },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.8, ease: easeOut },
-  },
-};
-
-const cardVariant = (i: number) => ({
-  hidden: { opacity: 0, y: 60, scale: 0.9, rotateY: -8 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    rotateY: 0,
-    transition: { delay: i * 0.08, duration: 0.7, ease: easeOut },
+    transition: { delay: i * 0.1, duration: 0.7, ease: easeOut },
   },
 });
 
@@ -67,62 +53,76 @@ const ServicesSection = () => {
           speed={1}
         />
       </div>
+
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
         {/* Header */}
         <motion.div
-          className="text-center mb-14"
-          variants={headerVariants}
-          initial="hidden"
-          whileInView="visible"
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: easeOut }}
         >
-          <motion.p variants={fadeBlurUp} className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
-            What We Offer
-          </motion.p>
-          <AnimatedTitle className="text-4xl md:text-5xl text-white" delay={0.15}>
-            Our Services
+          <AnimatedTitle
+            as="h2"
+            className="text-3xl md:text-4xl lg:text-5xl text-white uppercase tracking-[0.15em]"
+            delay={0.1}
+          >
+            Where Innovation Meet Interior Design
           </AnimatedTitle>
         </motion.div>
 
-        {/* Cards Grid — 3D perspective tilt */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 perspective-container">
-          {services.map((s, i) => (
-            <motion.div
-              key={s.slug}
-              variants={cardVariant(i)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-40px" }}
-              whileHover={{
-                y: -10,
-                rotateX: 2,
-                rotateY: -2,
-                transition: { type: "spring", stiffness: 300, damping: 20 },
-              }}
-              style={{ transformStyle: "preserve-3d" }}
-            >
-              <Link to={`/services/${s.slug}`} className="group block">
-                <div className="relative rounded-xl overflow-hidden border border-border bg-card h-[320px] transition-all duration-500 hover:shadow-[0_20px_60px_hsl(var(--secondary)/0.2)]">
-                  <img
-                    src={s.image}
-                    alt={s.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 backdrop-blur-sm bg-black/20 border-t border-white/10">
-                    <h3 className="text-white text-lg font-semibold leading-tight drop-shadow-md">
+        {/* Cards Grid — vertical card layout like reference */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((s, i) => {
+            const Icon = serviceIcons[i];
+            return (
+              <motion.div
+                key={s.slug}
+                variants={cardVariant(i)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-40px" }}
+              >
+                <Link to={`/services/${s.slug}`} className="group block h-full">
+                  <div className="relative h-full rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-6 flex flex-col transition-all duration-500 hover:border-secondary/40 hover:bg-white/[0.06] hover:shadow-[0_8px_40px_hsl(var(--secondary)/0.1)]">
+                    {/* Icon circle */}
+                    <div className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center mb-5 group-hover:border-secondary/50 transition-colors duration-500">
+                      <Icon className="w-6 h-6 text-secondary/80 group-hover:text-secondary transition-colors duration-300" strokeWidth={1.5} />
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-white text-sm font-bold uppercase tracking-wider leading-snug mb-4 min-h-[2.5rem]">
                       {s.title}
                     </h3>
-                    <p className="text-white/70 text-sm mt-1 line-clamp-2">{s.desc}</p>
-                    <span className="inline-flex items-center gap-1 text-secondary text-sm font-semibold mt-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                      Know More <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
+
+                    {/* Image */}
+                    <div className="relative rounded-lg overflow-hidden mb-5 aspect-[4/3]">
+                      <img
+                        src={s.image}
+                        alt={s.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-white/50 text-sm font-body leading-relaxed flex-1 mb-5">
+                      {s.desc}
+                    </p>
+
+                    {/* Arrow link */}
+                    <div className="mt-auto">
+                      <span className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-white/20 group-hover:border-secondary group-hover:bg-secondary/10 transition-all duration-300">
+                        <ArrowUpRight className="w-4 h-4 text-white/50 group-hover:text-secondary transition-colors duration-300" />
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
