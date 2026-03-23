@@ -38,7 +38,7 @@ const ServicesSection = () => {
       <div className="absolute inset-0 z-0">
         <img src="/images/section-shape-1-4.png" alt="" className="w-full h-full object-cover opacity-80" />
       </div>
-      <div className="absolute inset-0 bg-foreground/80 z-0" />
+      <div className="absolute inset-0 bg-foreground/65 z-0" />
 
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
         {/* Header */}
