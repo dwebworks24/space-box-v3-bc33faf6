@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { ClipboardList, Palette, LayoutGrid, Box, ShoppingBag, HardHat, CheckCircle, HandshakeIcon } from "lucide-react";
+import AnimatedTitle from "./AnimatedTitle";
 import ctaBg from "@/assets/cta-bg.jpg";
 
 const stages = [
