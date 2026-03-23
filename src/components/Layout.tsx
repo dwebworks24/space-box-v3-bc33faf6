@@ -6,6 +6,7 @@ import FloatingButtons from './FloatingButtons';
 import MusicPlayer from './MusicPlayer';
 import PageTransition from './PageTransition';
 import ScrollToTop from './ScrollToTop';
+import CustomCursor from './CustomCursor';
 import { useLenis } from '@/hooks/useLenis';
 
 export default function Layout() {
@@ -14,6 +15,7 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen bg-background relative">
+      <CustomCursor />
       <div className="relative">
         <ScrollToTop />
         <Navbar />
