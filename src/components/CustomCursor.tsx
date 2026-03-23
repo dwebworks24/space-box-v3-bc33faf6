@@ -80,6 +80,7 @@ function SplashCanvas() {
       const alpha = p.opacity * (1 - progress);
       const s = p.size * (0.3 + 0.7 * Math.min(p.life / 10, 1)) * (1 - progress * 0.3);
       const wingFlap = Math.sin(p.wingPhase + p.life * p.wingSpeed) * 0.8;
+      const hue = p.hue ?? 3;
 
       ctx.save();
       ctx.translate(p.x, p.y);
