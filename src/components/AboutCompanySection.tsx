@@ -84,7 +84,7 @@ const AboutCompanySection = () => {
         src={shapeImg}
         alt=""
         className="absolute -top-10 -left-10 w-[400px] lg:w-[550px] pointer-events-none"
-        style={{ y: shapeY, rotate: shapeRotate, opacity: 0.18 }}
+        style={{ y: shapeY, rotate: shapeRotate, opacity: 0.30 }}
       />
 
       {/* Circle shapes - decorative — larger, brighter, parallax */}
