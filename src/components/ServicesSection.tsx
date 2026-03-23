@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedTitle from "./AnimatedTitle";
 import { Link } from "react-router-dom";
