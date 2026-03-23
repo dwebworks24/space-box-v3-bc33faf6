@@ -58,7 +58,7 @@ const ServicesSection = () => {
         </div>
 
         {/* Cards Grid — 5 columns side by side with right border dividers */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {services.map((s, i) => {
             const Icon = serviceIcons[i];
             const isLast = i === services.length - 1;
