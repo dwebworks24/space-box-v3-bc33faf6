@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import sectionShape from "@/assets/section-shape-1.png";
+import circleShape1 from "@/assets/site-footer-two-shape-1.png";
 
 import work1 from "@/assets/projects/work-1.png";
 import work2 from "@/assets/projects/work-2.png";
@@ -56,9 +58,13 @@ const OurWorkSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-gradient-to-b from-[hsl(25,40%,95%)] to-[hsl(35,45%,93%)]"
+      className="relative bg-foreground"
       style={{ height: `${totalScrollHeight}px` }}
     >
+      {/* Background texture */}
+      <img src={sectionShape} alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.04] pointer-events-none" />
+      <img src={circleShape1} alt="" className="absolute bottom-0 right-0 w-[250px] opacity-[0.06] pointer-events-none" />
+
       {/* Sticky container that stays in view */}
       <div className="sticky top-0 h-screen overflow-hidden flex items-center pt-32 lg:pt-0">
         <div className="container mx-auto px-4 sm:px-6 md:px-10 lg:px-20">
@@ -74,12 +80,12 @@ const OurWorkSection = () => {
               <p className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 mt-8 sm:mt-0 font-body">
                 Our Work
               </p>
-              <h2 className="text-4xl md:text-5xl text-foreground leading-tight mt-4 sm:mt-0">
+              <h2 className="text-4xl md:text-5xl text-white leading-tight mt-4 sm:mt-0">
                 Spaces We 
                 <br />
                 Designed 
               </h2>
-              <p className="mt-6 text-muted-foreground font-body max-w-sm leading-relaxed">
+              <p className="mt-6 text-white/60 font-body max-w-sm leading-relaxed">
                 Explore our completed projects in the form of Residential, Commercial, and Office Interior Designers in Telangana.
               </p>
 
