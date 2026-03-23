@@ -85,7 +85,7 @@ const OurWorkSection = () => {
                 <br />
                 Designed 
               </h2>
-              <p className="mt-6 text-muted-foreground font-body max-w-sm leading-relaxed">
+              <p className="mt-6 text-white/60 font-body max-w-sm leading-relaxed">
                 Explore our completed projects in the form of Residential, Commercial, and Office Interior Designers in Telangana.
               </p>
 
