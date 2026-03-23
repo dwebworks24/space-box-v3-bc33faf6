@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 // Scene 1: Sofa/Living Room
 import bgImage from "@/assets/hero/sofa-main-bg.webp";
@@ -11,7 +12,6 @@ import sofaImage from "@/assets/hero/sofa-main.webp";
 import table1Image from "@/assets/hero/sofa-table1.webp";
 import table2Image from "@/assets/hero/sofa-table2.webp";
 import chairImage from "@/assets/hero/sofa-chair.webp";
-
 
 // Scene 3: Living Room
 import scene3Bg from "@/assets/hero/scene3-bg.png";
@@ -187,22 +187,13 @@ const scene3Parts: HeroPart[] = [
 ];
 
 const scenes = [scene1Parts, scene3Parts];
-const SLIDE_DURATION = 8000; // ms per slide
+const SLIDE_DURATION = 8000;
 
-const textContainerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15, delayChildren: 1.6 } },
-};
-
-const fadeBlurUp = {
-  hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.9, ease: easeOut },
-  },
-};
+/* Slide headlines — match to existing SpaceBox content */
+const slideContent = [
+  { watermarkTop: "INTERIOR", headline: "Design Make Dream", watermarkBottom: "DESIGN" },
+  { watermarkTop: "SPACEBOX", headline: "Living Room Design", watermarkBottom: "CONCEPTS" },
+];
 
 const SceneLayer = ({ parts, sceneKey }: { parts: HeroPart[]; sceneKey: number }) => (
   <motion.div
@@ -227,6 +218,36 @@ const SceneLayer = ({ parts, sceneKey }: { parts: HeroPart[]; sceneKey: number }
   </motion.div>
 );
 
+/* ── Watermark text animation ── */
+const watermarkVariants = {
+  hidden: { opacity: 0, x: -80 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 1.2, ease: easeOut },
+  },
+  exit: {
+    opacity: 0,
+    x: 80,
+    transition: { duration: 0.6, ease: easeOut },
+  },
+};
+
+const headlineCharVariants = {
+  hidden: { opacity: 0, y: 60, rotateX: -90 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: { duration: 0.6, delay: 0.8 + i * 0.04, ease: easeOut },
+  }),
+  exit: {
+    opacity: 0,
+    y: -40,
+    transition: { duration: 0.4, ease: easeOut },
+  },
+};
+
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeScene, setActiveScene] = useState(0);
@@ -239,14 +260,20 @@ const HeroSection = () => {
   const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
-  const nextScene = useCallback(() => {
+  const goNext = useCallback(() => {
     setActiveScene((prev) => (prev + 1) % scenes.length);
   }, []);
 
+  const goPrev = useCallback(() => {
+    setActiveScene((prev) => (prev - 1 + scenes.length) % scenes.length);
+  }, []);
+
   useEffect(() => {
-    const timer = setInterval(nextScene, SLIDE_DURATION);
+    const timer = setInterval(goNext, SLIDE_DURATION);
     return () => clearInterval(timer);
-  }, [nextScene]);
+  }, [goNext]);
+
+  const current = slideContent[activeScene];
 
   return (
     <section
@@ -261,9 +288,9 @@ const HeroSection = () => {
         </AnimatePresence>
       </motion.div>
 
-      {/* Dark overlay */}
+      {/* Dark overlays */}
       <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/40 to-transparent" />
 
       {/* Noise texture */}
       <div
@@ -273,57 +300,137 @@ const HeroSection = () => {
         }}
       />
 
-      {/* Slide indicators */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-3">
-        {scenes.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActiveScene(i)}
-            className={`h-1 rounded-full transition-all duration-500 ${
-              i === activeScene ? "w-8 bg-primary-foreground" : "w-4 bg-primary-foreground/40"
-            }`}
-            aria-label={`Go to slide ${i + 1}`}
-          />
+      {/* Left sidebar — social & contact (desktop only) */}
+      <div className="hidden lg:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-6">
+        {["instagram", "facebook", "twitter"].map((social) => (
+          <a
+            key={social}
+            href="#"
+            className="w-7 h-7 flex items-center justify-center text-primary-foreground/50 hover:text-secondary transition-colors duration-300"
+            aria-label={social}
+          >
+            <span className="text-xs uppercase tracking-widest" style={{ writingMode: "vertical-lr" }}>
+              {social === "instagram" ? "IG" : social === "facebook" ? "FB" : "TW"}
+            </span>
+          </a>
         ))}
+        <div className="w-px h-12 bg-primary-foreground/20" />
+        <a
+          href="tel:+919876543210"
+          className="text-primary-foreground/50 hover:text-secondary transition-colors"
+          style={{ writingMode: "vertical-lr" }}
+        >
+          <span className="text-xs tracking-wider">+91 98765 43210</span>
+        </a>
+        <div className="w-px h-12 bg-primary-foreground/20" />
+        <a
+          href="mailto:info@spaceboxconcepts.com"
+          className="text-primary-foreground/50 hover:text-secondary transition-colors"
+          style={{ writingMode: "vertical-lr" }}
+        >
+          <span className="text-xs tracking-wider">info@spaceboxconcepts.com</span>
+        </a>
       </div>
 
-      {/* Text content */}
-      <div className="relative z-10 flex items-center min-h-[75vh] sm:min-h-screen container mx-auto px-4 sm:px-8 md:px-16">
+      {/* Text content with watermark */}
+      <div className="relative z-10 flex items-center min-h-[75vh] sm:min-h-screen container mx-auto px-4 sm:px-8 md:px-16 lg:pl-24">
         <motion.div
-          className="max-w-2xl pt-20 sm:pt-24 pb-16 sm:pb-0"
+          className="max-w-2xl pt-20 sm:pt-24 pb-16 sm:pb-0 relative"
           style={{ y: textY, opacity: textOpacity }}
         >
-          <motion.div
-            variants={textContainerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.p
-              variants={fadeBlurUp}
-              className="text-primary-foreground/70 text-sm sm:text-base tracking-[0.3em] uppercase font-body mb-3"
-            >
-              Make your home
-            </motion.p>
-
-            <motion.h1
-              variants={fadeBlurUp}
-              className="text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.05] tracking-tight text-primary-foreground"
-              style={{ fontFamily: "var(--font-serif)" }}
-            >
-              A Reflection Of{" "}
-              <span className="text-secondary">YOU</span>
-            </motion.h1>
-
-            <motion.div variants={fadeBlurUp} className="mt-8">
-              <Link
-                to="/start-project"
-                className="inline-flex px-8 py-3.5 rounded-sm border border-primary-foreground/60 text-primary-foreground font-semibold tracking-widest uppercase text-sm hover:bg-primary-foreground hover:text-primary transition-all duration-500 ease-out"
+          <AnimatePresence mode="wait">
+            <motion.div key={activeScene} className="relative">
+              {/* Watermark top — large outline text behind */}
+              <motion.span
+                variants={watermarkVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="block text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-bold leading-none uppercase select-none pointer-events-none"
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  WebkitTextStroke: "1px hsl(var(--primary-foreground) / 0.08)",
+                  color: "transparent",
+                  lineHeight: 0.85,
+                }}
               >
-                Start Your Journey
-              </Link>
+                {current.watermarkTop}
+              </motion.span>
+
+              {/* Main headline — character-by-character animation */}
+              <motion.h1
+                className="relative -mt-6 sm:-mt-10 md:-mt-14 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-[1.1] tracking-tight z-10"
+                style={{ fontFamily: "var(--font-serif)" }}
+              >
+                {current.headline.split("").map((char, i) => (
+                  <motion.span
+                    key={`${activeScene}-${i}`}
+                    custom={i}
+                    variants={headlineCharVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className="inline-block"
+                    style={{ display: char === " " ? "inline" : "inline-block" }}
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </motion.h1>
+
+              {/* Watermark bottom — large outline text */}
+              <motion.span
+                variants={watermarkVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="block text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-bold leading-none uppercase select-none pointer-events-none -mt-2 sm:-mt-4"
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  WebkitTextStroke: "1px hsl(var(--primary-foreground) / 0.06)",
+                  color: "transparent",
+                  lineHeight: 0.85,
+                }}
+              >
+                {current.watermarkBottom}
+              </motion.span>
+
+              {/* CTA Button */}
+              <motion.div
+                className="mt-8 sm:mt-10"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 1.4, ease: easeOut }}
+              >
+                <Link
+                  to="/start-project"
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-secondary text-secondary-foreground font-semibold tracking-widest uppercase text-sm hover:bg-secondary/90 transition-all duration-500 ease-out"
+                >
+                  Get In Touch
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                </Link>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </AnimatePresence>
         </motion.div>
+      </div>
+
+      {/* Navigation arrows — bottom left */}
+      <div className="absolute bottom-8 sm:bottom-12 left-4 sm:left-8 md:left-16 lg:left-24 z-20 flex gap-3">
+        <button
+          onClick={goPrev}
+          className="w-12 h-12 rounded-full border border-primary-foreground/30 flex items-center justify-center text-primary-foreground/60 hover:border-secondary hover:text-secondary transition-all duration-300 active:scale-95"
+          aria-label="Previous slide"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+        <button
+          onClick={goNext}
+          className="w-12 h-12 rounded-full border border-primary-foreground/30 flex items-center justify-center text-primary-foreground/60 hover:border-secondary hover:text-secondary transition-all duration-300 active:scale-95"
+          aria-label="Next slide"
+        >
+          <ArrowRight className="w-5 h-5" />
+        </button>
       </div>
 
       {/* Scroll indicator */}
