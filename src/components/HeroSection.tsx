@@ -21,6 +21,18 @@ import bedroomPlant from "@/assets/hero/bedroom-plant.png";
 import bedroomChair from "@/assets/hero/bedroom-chair.png";
 import bedroomArt from "@/assets/hero/bedroom-art.png";
 
+// Scene 3: Living Room
+import scene3Bg from "@/assets/hero/scene3-bg.png";
+import scene3Sofa from "@/assets/hero/scene3-sofa.png";
+import scene3Carpet from "@/assets/hero/scene3-carpet.png";
+import scene3Lamp from "@/assets/hero/scene3-lamp.png";
+import scene3Plant from "@/assets/hero/scene3-plant.png";
+import scene3Table1 from "@/assets/hero/scene3-table1.png";
+import scene3Table2 from "@/assets/hero/scene3-table2.png";
+import scene3Cup from "@/assets/hero/scene3-cup.png";
+import scene3Book from "@/assets/hero/scene3-book.png";
+import scene3Vase from "@/assets/hero/scene3-vase.png";
+
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 interface HeroPart {
