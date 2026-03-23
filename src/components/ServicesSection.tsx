@@ -1,16 +1,15 @@
 import { motion } from "framer-motion";
 import AnimatedTitle from "./AnimatedTitle";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Home, Building2, LayoutGrid, Palette, FolderKanban, BadgeCheck } from "lucide-react";
-import Galaxy from "./Galaxy";
+import { ArrowUpRight, Home, Building2, LayoutGrid, Palette, FolderKanban } from "lucide-react";
+import sectionBg from "@/assets/section-shape-1-2.png";
 import consultationImg from "@/assets/services/consultation.jpg";
 import designPlanningImg from "@/assets/services/design-planning.jpg";
 import spaceOptImg from "@/assets/services/space-optimization.jpg";
 import colourImg from "@/assets/services/colour-schemes.jpg";
-import qualityImg from "@/assets/services/quality.jpg";
 import projectMgmtImg from "@/assets/services/project-management.jpg";
 
-const serviceIcons = [Home, Building2, LayoutGrid, Palette, FolderKanban, BadgeCheck];
+const serviceIcons = [Home, Building2, LayoutGrid, Palette, FolderKanban];
 
 export const services = [
   { slug: "residential-interior-design", title: "Residential Interior Design", image: consultationImg, desc: "Transforming homes into personalised, functional living spaces.", fullDesc: "We design homes that reflect your personality and lifestyle. From cosy bedrooms to elegant living rooms, our residential interior design service covers space planning, material selection, furniture curation, and styling — creating warm, inviting spaces that feel uniquely yours. Every detail is crafted to balance aesthetics with everyday comfort." },
