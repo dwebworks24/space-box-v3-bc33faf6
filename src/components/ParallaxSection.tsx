@@ -26,15 +26,22 @@ export default function ParallaxSection({
   const ref = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
+  if (isMobile) {
+    return (
+      <div className={`relative ${className}`}>
+        {children}
+      </div>
+    );
+  }
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
-  const mobileScale = isMobile ? scaleAmount * 0.25 : scaleAmount;
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1 - mobileScale]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1, fadeOut ? (isMobile ? 0.9 : 0.6) : 1]);
-  const borderRadius = useTransform(scrollYProgress, [0, 0.5], ["0px", isMobile ? "8px" : "20px"]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1 - scaleAmount]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1, fadeOut ? 0.6 : 1]);
+  const borderRadius = useTransform(scrollYProgress, [0, 0.5], ["0px", "20px"]);
 
   if (!sticky) {
     return (
