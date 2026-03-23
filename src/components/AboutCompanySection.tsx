@@ -92,7 +92,7 @@ const AboutCompanySection = () => {
         src={circleShape1}
         alt=""
         className="absolute -bottom-10 -left-10 w-[300px] lg:w-[420px] pointer-events-none"
-        style={{ y: circle1Y, opacity: 0.30 }}
+        style={{ y: circle1Y, opacity: 0.45 }}
       />
       <motion.img
         src={circleShape2}
