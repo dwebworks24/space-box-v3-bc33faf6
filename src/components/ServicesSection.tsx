@@ -39,8 +39,6 @@ const slideVariants = {
   exit: (dir: number) => ({ x: dir > 0 ? -300 : 300, opacity: 0 }),
 };
 
-import { forwardRef } from "react";
-
 const ServiceCard = forwardRef<HTMLDivElement, { s: typeof services[0]; i: number; isLast: boolean; showBorder?: boolean }>(({ s, i, isLast, showBorder = true }, ref) => {
   const Icon = serviceIcons[i];
   return (
