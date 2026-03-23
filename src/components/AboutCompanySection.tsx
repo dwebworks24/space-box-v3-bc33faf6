@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import AnimatedTitle from "./AnimatedTitle";
 import logo from "@/assets/space-box-logo.png";
 import aboutImg from "@/assets/about-us-img.png";
 import shapeImg from "@/assets/about-v1-shape1.png";
