@@ -147,9 +147,6 @@ const AboutCompanySection = () => {
           >
             About Us
           </motion.p>
-          <AnimatedTitle className="text-4xl md:text-5xl text-white leading-tight">
-            Welcome To About Us
-          </AnimatedTitle>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-6 items-center">
