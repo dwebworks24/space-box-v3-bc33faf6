@@ -21,6 +21,18 @@ import bedroomPlant from "@/assets/hero/bedroom-plant.png";
 import bedroomChair from "@/assets/hero/bedroom-chair.png";
 import bedroomArt from "@/assets/hero/bedroom-art.png";
 
+// Scene 3: Living Room
+import scene3Bg from "@/assets/hero/scene3-bg.png";
+import scene3Sofa from "@/assets/hero/scene3-sofa.png";
+import scene3Carpet from "@/assets/hero/scene3-carpet.png";
+import scene3Lamp from "@/assets/hero/scene3-lamp.png";
+import scene3Plant from "@/assets/hero/scene3-plant.png";
+import scene3Table1 from "@/assets/hero/scene3-table1.png";
+import scene3Table2 from "@/assets/hero/scene3-table2.png";
+import scene3Cup from "@/assets/hero/scene3-cup.png";
+import scene3Book from "@/assets/hero/scene3-book.png";
+import scene3Vase from "@/assets/hero/scene3-vase.png";
+
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 interface HeroPart {
@@ -158,7 +170,90 @@ const scene2Parts: HeroPart[] = [
   },
 ];
 
-const scenes = [scene1Parts, scene2Parts];
+const scene3Parts: HeroPart[] = [
+  {
+    src: scene3Bg,
+    alt: "Dark room background",
+    className: "absolute inset-0 w-full h-full object-cover",
+    initial: { opacity: 0, scale: 1.3 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { duration: 1.8, ease: easeOut },
+  },
+  {
+    src: scene3Carpet,
+    alt: "Floor carpet",
+    className: "absolute bottom-[0%] left-[10%] right-[10%] h-[15%] object-contain object-bottom",
+    initial: { opacity: 0, y: 100 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 1.3, delay: 0.4, ease: easeOut },
+  },
+  {
+    src: scene3Lamp,
+    alt: "Pendant lamp",
+    className: "absolute top-0 right-[20%] h-[45%] w-auto object-contain",
+    initial: { opacity: 0, y: -200 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 1.5, delay: 0.3, ease: easeOut },
+  },
+  {
+    src: scene3Sofa,
+    alt: "Yellow sofa",
+    className: "absolute bottom-[8%] left-[15%] right-[15%] h-[35%] object-contain object-bottom",
+    initial: { opacity: 0, y: 150 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 1.4, delay: 0.7, ease: easeOut },
+  },
+  {
+    src: scene3Table1,
+    alt: "Gold coffee table",
+    className: "absolute bottom-[10%] right-[10%] h-[20%] w-auto object-contain",
+    initial: { opacity: 0, x: 180 },
+    animate: { opacity: 1, x: 0 },
+    transition: { duration: 1.3, delay: 0.9, ease: easeOut },
+  },
+  {
+    src: scene3Table2,
+    alt: "Gold side table",
+    className: "absolute bottom-[12%] left-[8%] h-[18%] w-auto object-contain",
+    initial: { opacity: 0, x: -150 },
+    animate: { opacity: 1, x: 0 },
+    transition: { duration: 1.2, delay: 1.0, ease: easeOut },
+  },
+  {
+    src: scene3Plant,
+    alt: "Indoor plant",
+    className: "absolute bottom-[5%] left-[0%] h-[40%] w-auto object-contain",
+    initial: { opacity: 0, x: -160 },
+    animate: { opacity: 1, x: 0 },
+    transition: { duration: 1.3, delay: 0.8, ease: easeOut },
+  },
+  {
+    src: scene3Vase,
+    alt: "Plant vase",
+    className: "absolute bottom-[15%] right-[2%] h-[15%] w-auto object-contain",
+    initial: { opacity: 0, y: 100 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 1.2, delay: 1.1, ease: easeOut },
+  },
+  {
+    src: scene3Cup,
+    alt: "Coffee cup",
+    className: "absolute bottom-[22%] right-[12%] h-[8%] w-auto object-contain",
+    initial: { opacity: 0, y: 50 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 1.0, delay: 1.2, ease: easeOut },
+  },
+  {
+    src: scene3Book,
+    alt: "Open book",
+    className: "absolute bottom-[22%] left-[10%] h-[8%] w-auto object-contain",
+    initial: { opacity: 0, y: 50 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 1.0, delay: 1.3, ease: easeOut },
+  },
+];
+
+const scenes = [scene1Parts, scene2Parts, scene3Parts];
 const SLIDE_DURATION = 8000; // ms per slide
 
 const textContainerVariants = {
