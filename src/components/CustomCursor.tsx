@@ -1,6 +1,130 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  angle: number;
+  speed: number;
+  size: number;
+  life: number;
+  maxLife: number;
+  opacity: number;
+}
+
+function SplashCanvas() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const particlesRef = useRef<Particle[]>([]);
+  const idCounter = useRef(0);
+  const lastPos = useRef({ x: 0, y: 0 });
+  const animRef = useRef<number>(0);
+
+  const spawnParticles = useCallback((x: number, y: number, count: number) => {
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 1 + Math.random() * 3;
+      const size = 1.5 + Math.random() * 3;
+      const maxLife = 20 + Math.random() * 30;
+      particlesRef.current.push({
+        id: idCounter.current++,
+        x, y, angle, speed, size,
+        life: 0,
+        maxLife,
+        opacity: 0.6 + Math.random() * 0.4,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const onMove = (e: MouseEvent) => {
+      const dx = e.clientX - lastPos.current.x;
+      const dy = e.clientY - lastPos.current.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > 8) {
+        const count = Math.min(Math.floor(dist / 6), 5);
+        spawnParticles(e.clientX, e.clientY, count);
+        lastPos.current = { x: e.clientX, y: e.clientY };
+      }
+    };
+
+    const onClick = (e: MouseEvent) => {
+      spawnParticles(e.clientX, e.clientY, 12);
+    };
+
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("click", onClick);
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const particles = particlesRef.current;
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.life++;
+        p.x += Math.cos(p.angle) * p.speed;
+        p.y += Math.sin(p.angle) * p.speed;
+        p.speed *= 0.96;
+
+        const progress = p.life / p.maxLife;
+        const alpha = p.opacity * (1 - progress);
+        const currentSize = p.size * (1 - progress * 0.5);
+
+        if (p.life >= p.maxLife) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        // Use the secondary color (approx hsl(3, 76%, 53%) → rgb)
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, currentSize, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(215, 60, 40, ${alpha})`;
+        ctx.fill();
+
+        // Soft glow
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, currentSize * 2.5, 0, Math.PI * 2);
+        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 2.5);
+        grad.addColorStop(0, `rgba(215, 60, 40, ${alpha * 0.3})`);
+        grad.addColorStop(1, `rgba(215, 60, 40, 0)`);
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+
+      animRef.current = requestAnimationFrame(animate);
+    };
+
+    animRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("click", onClick);
+      cancelAnimationFrame(animRef.current);
+    };
+  }, [spawnParticles]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-[9998]"
+      style={{ mixBlendMode: "screen" }}
+    />
+  );
+}
 
 export default function CustomCursor() {
   const isMobile = useIsMobile();
@@ -47,6 +171,7 @@ export default function CustomCursor() {
 
   return (
     <>
+      <SplashCanvas />
       {/* Outer glow trail */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-screen"
