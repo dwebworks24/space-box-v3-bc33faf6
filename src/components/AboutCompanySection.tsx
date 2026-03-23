@@ -98,7 +98,7 @@ const AboutCompanySection = () => {
         src={circleShape2}
         alt=""
         className="absolute -top-10 -right-10 w-[300px] lg:w-[420px] pointer-events-none"
-        style={{ y: circle2Y, opacity: 0.30 }}
+        style={{ y: circle2Y, opacity: 0.45 }}
       />
 
       {/* Extra section shape - right side mid */}
