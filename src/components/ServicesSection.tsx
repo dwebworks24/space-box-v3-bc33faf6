@@ -1,16 +1,15 @@
 import { motion } from "framer-motion";
 import AnimatedTitle from "./AnimatedTitle";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Home, Building2, LayoutGrid, Palette, FolderKanban, BadgeCheck } from "lucide-react";
-import Galaxy from "./Galaxy";
+import { ArrowUpRight, Home, Building2, LayoutGrid, Palette, FolderKanban } from "lucide-react";
+import sectionBg from "@/assets/section-shape-1-2.png";
 import consultationImg from "@/assets/services/consultation.jpg";
 import designPlanningImg from "@/assets/services/design-planning.jpg";
 import spaceOptImg from "@/assets/services/space-optimization.jpg";
 import colourImg from "@/assets/services/colour-schemes.jpg";
-import qualityImg from "@/assets/services/quality.jpg";
 import projectMgmtImg from "@/assets/services/project-management.jpg";
 
-const serviceIcons = [Home, Building2, LayoutGrid, Palette, FolderKanban, BadgeCheck];
+const serviceIcons = [Home, Building2, LayoutGrid, Palette, FolderKanban];
 
 export const services = [
   { slug: "residential-interior-design", title: "Residential Interior Design", image: consultationImg, desc: "Transforming homes into personalised, functional living spaces.", fullDesc: "We design homes that reflect your personality and lifestyle. From cosy bedrooms to elegant living rooms, our residential interior design service covers space planning, material selection, furniture curation, and styling — creating warm, inviting spaces that feel uniquely yours. Every detail is crafted to balance aesthetics with everyday comfort." },
@@ -18,7 +17,6 @@ export const services = [
   { slug: "space-planning-concept-development", title: "Space Planning & Concept Development", image: spaceOptImg, desc: "Strategic layouts, zoning & creative concept ideation.", fullDesc: "Great interiors begin with great planning. We develop comprehensive spatial strategies with functional zoning, traffic flow analysis, and creative concept ideation. Through mood boards, 3D visualisations, and detailed floor plans, we map every square foot to ensure your space is both beautiful and brilliantly functional." },
   { slug: "material-color-consultation", title: "Material & Color Consultation", image: colourImg, desc: "Expert guidance on palettes, textures, finishes & materials.", fullDesc: "Choosing the right materials and colours is critical to achieving the desired look and feel. Our consultants combine colour psychology with hands-on material expertise to develop cohesive palettes and textures. From paint finishes and flooring to fabrics and fixtures, every selection is curated to create a harmonious, lasting interior." },
   { slug: "end-to-end-project-execution", title: "End-to-end Project Execution", image: projectMgmtImg, desc: "Complete project management from concept to move-in.", fullDesc: "We manage your entire project from initial concept through to final handover. Our end-to-end service includes vendor coordination, timeline management, on-site supervision, budget tracking, and quality inspections at every phase. With a single point of contact and regular progress updates, we deliver a stress-free experience and move-in ready spaces." },
-  { slug: "quality-of-service", title: "Quality of Service", image: qualityImg, desc: "Snag correction, decor layering & meticulous finishing.", fullDesc: "Quality is at the heart of everything we do. Our meticulous approach includes thorough snag correction, precise decor layering, and attention to the finest finishing details. We conduct multiple quality checks throughout the project to ensure every element meets our exacting standards and your expectations." },
 ];
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -36,23 +34,11 @@ const cardVariant = (i: number) => ({
 const ServicesSection = () => {
   return (
     <section id="services" className="py-20 md:py-28 relative overflow-hidden bg-foreground">
-      {/* Galaxy background */}
+      {/* Background texture */}
       <div className="absolute inset-0 z-0">
-        <Galaxy
-          mouseRepulsion
-          mouseInteraction
-          density={1}
-          glowIntensity={0.3}
-          saturation={0}
-          hueShift={140}
-          twinkleIntensity={0.3}
-          rotationSpeed={0.1}
-          repulsionStrength={2}
-          autoCenterRepulsion={0}
-          starSpeed={0.5}
-          speed={1}
-        />
+        <img src={sectionBg} alt="" className="w-full h-full object-cover opacity-[0.08]" />
       </div>
+      <div className="absolute inset-0 bg-foreground/90 z-0" />
 
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
         {/* Header */}
@@ -72,8 +58,8 @@ const ServicesSection = () => {
           </AnimatedTitle>
         </motion.div>
 
-        {/* Cards Grid — 6 columns side by side with right border dividers */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
+        {/* Cards Grid — 5 columns side by side with right border dividers */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
           {services.map((s, i) => {
             const Icon = serviceIcons[i];
             const isLast = i === services.length - 1;
