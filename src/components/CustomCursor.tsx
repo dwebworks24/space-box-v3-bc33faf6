@@ -105,13 +105,13 @@ function SplashCanvas() {
       // Body
       ctx.beginPath();
       ctx.ellipse(0, 0, s * 0.06, s * 0.3, 0, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${p.hue}, 50%, 30%, ${alpha})`;
+      ctx.fillStyle = `hsla(${hue}, 50%, 30%, ${alpha})`;
       ctx.fill();
 
       // Wing glow
       const grad = ctx.createRadialGradient(0, -s * 0.2, 0, 0, -s * 0.2, s);
-      grad.addColorStop(0, `hsla(${p.hue}, 76%, 53%, ${alpha * 0.15})`);
-      grad.addColorStop(1, `hsla(${p.hue}, 76%, 53%, 0)`);
+      grad.addColorStop(0, `hsla(${hue}, 76%, 53%, ${alpha * 0.15})`);
+      grad.addColorStop(1, `hsla(${hue}, 76%, 53%, 0)`);
       ctx.beginPath();
       ctx.arc(0, -s * 0.2, s, 0, Math.PI * 2);
       ctx.fillStyle = grad;
