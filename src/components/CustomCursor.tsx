@@ -12,6 +12,10 @@ interface Particle {
   life: number;
   maxLife: number;
   opacity: number;
+  wingPhase: number;
+  wingSpeed: number;
+  drift: number;
+  hue: number;
 }
 
 function SplashCanvas() {
@@ -23,16 +27,20 @@ function SplashCanvas() {
 
   const spawnParticles = useCallback((x: number, y: number, count: number) => {
     for (let i = 0; i < count; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const speed = 1 + Math.random() * 3;
-      const size = 1.5 + Math.random() * 3;
-      const maxLife = 20 + Math.random() * 30;
+      const angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI;
+      const speed = 0.5 + Math.random() * 1.5;
+      const size = 6 + Math.random() * 10;
+      const maxLife = 50 + Math.random() * 60;
       particlesRef.current.push({
         id: idCounter.current++,
         x, y, angle, speed, size,
         life: 0,
         maxLife,
-        opacity: 0.6 + Math.random() * 0.4,
+        opacity: 0.7 + Math.random() * 0.3,
+        wingPhase: Math.random() * Math.PI * 2,
+        wingSpeed: 0.15 + Math.random() * 0.1,
+        drift: (Math.random() - 0.5) * 0.5,
+        hue: Math.random() > 0.5 ? 3 : (15 + Math.random() * 25),
       });
     }
   }, []);
@@ -54,19 +62,62 @@ function SplashCanvas() {
       const dx = e.clientX - lastPos.current.x;
       const dy = e.clientY - lastPos.current.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist > 8) {
-        const count = Math.min(Math.floor(dist / 6), 5);
-        spawnParticles(e.clientX, e.clientY, count);
+      if (dist > 30) {
+        spawnParticles(e.clientX, e.clientY, 1);
         lastPos.current = { x: e.clientX, y: e.clientY };
       }
     };
 
     const onClick = (e: MouseEvent) => {
-      spawnParticles(e.clientX, e.clientY, 12);
+      spawnParticles(e.clientX, e.clientY, 4);
     };
 
     window.addEventListener("mousemove", onMove);
     window.addEventListener("click", onClick);
+
+    const drawButterfly = (ctx: CanvasRenderingContext2D, p: Particle) => {
+      const progress = p.life / p.maxLife;
+      const alpha = p.opacity * (1 - progress);
+      const s = p.size * (0.3 + 0.7 * Math.min(p.life / 10, 1)) * (1 - progress * 0.3);
+      const wingFlap = Math.sin(p.wingPhase + p.life * p.wingSpeed) * 0.8;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(Math.sin(p.life * 0.02 + p.drift) * 0.15);
+
+      // Left wing
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.bezierCurveTo(-s * 0.8 * (1 + wingFlap * 0.3), -s * 0.6, -s * (1 + wingFlap * 0.5), -s * 0.1, -s * 0.3, s * 0.3);
+      ctx.bezierCurveTo(-s * 0.6, s * 0.5, -s * 0.2, s * 0.4, 0, 0);
+      ctx.fillStyle = `hsla(${p.hue}, 76%, 53%, ${alpha})`;
+      ctx.fill();
+
+      // Right wing
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.bezierCurveTo(s * 0.8 * (1 + wingFlap * 0.3), -s * 0.6, s * (1 + wingFlap * 0.5), -s * 0.1, s * 0.3, s * 0.3);
+      ctx.bezierCurveTo(s * 0.6, s * 0.5, s * 0.2, s * 0.4, 0, 0);
+      ctx.fillStyle = `hsla(${p.hue}, 76%, 58%, ${alpha * 0.9})`;
+      ctx.fill();
+
+      // Body
+      ctx.beginPath();
+      ctx.ellipse(0, 0, s * 0.06, s * 0.3, 0, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${p.hue}, 50%, 30%, ${alpha})`;
+      ctx.fill();
+
+      // Wing glow
+      const grad = ctx.createRadialGradient(0, -s * 0.2, 0, 0, -s * 0.2, s);
+      grad.addColorStop(0, `hsla(${p.hue}, 76%, 53%, ${alpha * 0.15})`);
+      grad.addColorStop(1, `hsla(${p.hue}, 76%, 53%, 0)`);
+      ctx.beginPath();
+      ctx.arc(0, -s * 0.2, s, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      ctx.restore();
+    };
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -75,33 +126,17 @@ function SplashCanvas() {
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.life++;
-        p.x += Math.cos(p.angle) * p.speed;
-        p.y += Math.sin(p.angle) * p.speed;
-        p.speed *= 0.96;
-
-        const progress = p.life / p.maxLife;
-        const alpha = p.opacity * (1 - progress);
-        const currentSize = p.size * (1 - progress * 0.5);
+        p.x += Math.cos(p.angle) * p.speed + p.drift;
+        p.y += Math.sin(p.angle) * p.speed - 0.3;
+        p.speed *= 0.99;
+        p.angle += Math.sin(p.life * 0.05) * 0.02;
 
         if (p.life >= p.maxLife) {
           particles.splice(i, 1);
           continue;
         }
 
-        // Use the secondary color (approx hsl(3, 76%, 53%) → rgb)
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, currentSize, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(215, 60, 40, ${alpha})`;
-        ctx.fill();
-
-        // Soft glow
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, currentSize * 2.5, 0, Math.PI * 2);
-        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 2.5);
-        grad.addColorStop(0, `rgba(215, 60, 40, ${alpha * 0.3})`);
-        grad.addColorStop(1, `rgba(215, 60, 40, 0)`);
-        ctx.fillStyle = grad;
-        ctx.fill();
+        drawButterfly(ctx, p);
       }
 
       animRef.current = requestAnimationFrame(animate);
