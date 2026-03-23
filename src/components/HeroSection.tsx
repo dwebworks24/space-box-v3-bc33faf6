@@ -195,7 +195,7 @@ const scene1Parts: HeroPart[] = [
   },
 ];
 
-const scenes = [scene1Parts, scene2Parts, scene3Parts];
+const scenes = [scene1Parts, scene3Parts];
 const SLIDE_DURATION = 8000; // ms per slide
 
 const textContainerVariants = {
