@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
+import AnimatedTitle from "./AnimatedTitle";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchBlogList } from "@/services/blogService";
