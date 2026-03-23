@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import sectionShape from "@/assets/section-shape-1.png";
+import circleShape1 from "@/assets/site-footer-two-shape-1.png";
 
 import work1 from "@/assets/projects/work-1.png";
 import work2 from "@/assets/projects/work-2.png";
