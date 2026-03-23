@@ -221,6 +221,9 @@ export default function Galaxy({
         premultipliedAlpha: false,
         canvas: document.createElement('canvas'),
       });
+    } catch {
+      return;
+    }
     const gl = renderer.gl;
 
     if (transparent) {
