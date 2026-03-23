@@ -75,7 +75,7 @@ const AboutCompanySection = () => {
         <img
           src={sectionShape}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover opacity-[0.06]"
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.10]"
         />
       </div>
 
