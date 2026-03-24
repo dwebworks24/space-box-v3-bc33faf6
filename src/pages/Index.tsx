@@ -10,6 +10,7 @@ import StatsSection from "@/components/StatsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import BlogSection from "@/components/BlogSection";
 import CTAStrip from "@/components/CTAStrip";
+import FAQSection from "@/components/FAQSection";
 import ParallaxSection from "@/components/ParallaxSection";
 
 const Index = () => {
