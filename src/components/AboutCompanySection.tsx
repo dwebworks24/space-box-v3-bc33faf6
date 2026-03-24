@@ -64,7 +64,6 @@ const AboutCompanySection = () => {
 
   const circle1Y = useTransform(scrollYProgress, [0, 1], ["10%", "-15%"]);
   const circle2Y = useTransform(scrollYProgress, [0, 1], ["-10%", "20%"]);
-  const circle2Y = useTransform(scrollYProgress, [0, 1], ["-10%", "20%"]);
   const sectionShapeX = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]);
 
   return (
@@ -78,13 +77,6 @@ const AboutCompanySection = () => {
         />
       </div>
 
-      {/* Geometric wireframe shape - top left — now larger & more visible with parallax */}
-      <motion.img
-        src={shapeImg}
-        alt=""
-        className="absolute -top-10 -left-10 w-[400px] lg:w-[550px] pointer-events-none"
-        style={{ y: shapeY, rotate: shapeRotate, opacity: 0.45 }}
-      />
 
       {/* Circle shapes - decorative — larger, brighter, parallax */}
       <motion.img
