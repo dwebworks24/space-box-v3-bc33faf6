@@ -24,9 +24,9 @@ export default function Blog() {
       />
       <SubBanner
         image={blogsBanner}
-        title="Design"
+        title="Our"
         highlight="Blog"
-        subtitle="Insights"
+        subtitle="Tips, Trends & Inspiration"
       />
 
       <section className="py-24 lg:py-32">
