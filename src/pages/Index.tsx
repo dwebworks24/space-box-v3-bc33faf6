@@ -10,6 +10,7 @@ import StatsSection from "@/components/StatsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import BlogSection from "@/components/BlogSection";
 import CTAStrip from "@/components/CTAStrip";
+import FAQSection from "@/components/FAQSection";
 import ParallaxSection from "@/components/ParallaxSection";
 
 const Index = () => {
@@ -63,8 +64,12 @@ const Index = () => {
         <BlogSection />
       </div>
 
+      <div className="relative" style={{ zIndex: 11 }}>
+        <FAQSection />
+      </div>
+
       {/* Last section - no sticky needed */}
-      <ParallaxSection zIndex={11} sticky={false}>
+      <ParallaxSection zIndex={12} sticky={false}>
         <CTAStrip />
       </ParallaxSection>
     </>
