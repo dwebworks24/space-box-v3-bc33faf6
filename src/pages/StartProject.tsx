@@ -175,7 +175,7 @@ const StartProject = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="Start Your Project - Get a Free Quote"
+        title="Get a Quote"
         description="Start your interior design project with SpaceBox Concepts. Tell us about your space, style preferences, and budget to get a personalized design proposal."
         keywords="start interior design project, free design quote, interior design inquiry, SpaceBox Concepts project, home renovation, office design project"
       />
