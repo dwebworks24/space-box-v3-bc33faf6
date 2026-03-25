@@ -56,11 +56,11 @@ export default function FAQSection() {
             <span className="text-secondary font-semibold uppercase tracking-widest text-xs">
               FAQ
             </span>
-            <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+            <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
               Frequently Asked{" "}
               <span className="text-secondary">Questions</span>
             </h2>
-            <p className="mt-4 text-muted-foreground max-w-md font-body">
+            <p className="mt-4 text-white/60 max-w-md font-body">
               Everything you need to know before starting your interior design
               journey with SpaceBox Concepts.
             </p>
