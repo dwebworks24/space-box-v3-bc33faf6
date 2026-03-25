@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import ctaBg from "@/assets/cta-bg.jpg";
 import {
   Accordion,
   AccordionContent,
