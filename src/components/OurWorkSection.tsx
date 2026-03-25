@@ -41,7 +41,7 @@ const OurWorkSection = () => {
     return () => window.removeEventListener("resize", handler);
   }, []);
 
-  const cardHeight = isMobile ? 240 : PROJECT_HEIGHT;
+  const cardHeight = isMobile ? 300 : PROJECT_HEIGHT;
 
   // Scroll height: one viewport + enough to scroll through remaining cards
   const extraScroll = (projects.length - VISIBLE_CARDS) * (cardHeight + GAP);
