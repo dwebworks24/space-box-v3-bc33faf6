@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Shield, Clock, Gem, Handshake, Leaf, HeartHandshake } from "lucide-react";
 import shapeImg from "@/assets/about-v1-shape1.png";
 import circleShape2 from "@/assets/site-footer-two-shape-2.png";
+import ctaBg from "@/assets/cta-bg.jpg";
 import AnimatedTitle from "./AnimatedTitle";
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
