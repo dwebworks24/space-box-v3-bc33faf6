@@ -43,7 +43,7 @@ const faqs = [
 
 export default function FAQSection() {
   return (
-    <section className="bg-background py-20 md:py-28">
+    <section className="py-20 md:py-28" style={{ background: "linear-gradient(160deg, hsl(260 8% 22%) 0%, hsl(320 18% 38%) 50%, hsl(330 22% 45%) 100%)" }}>
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
         <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-20 items-start">
           {/* Left – heading */}
