@@ -1,6 +1,6 @@
 import { motion, useInView, useSpring, useMotionValue, useTransform, useScroll } from "framer-motion";
 import { useRef, useEffect } from "react";
-import ctaBg from "@/assets/cta-bg.jpg";
+import statsBg from "@/assets/stats-bg.png";
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
