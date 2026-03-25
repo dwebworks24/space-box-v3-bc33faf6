@@ -113,7 +113,7 @@ const OurWorkSection = () => {
               </a>
 
               {/* Progress dots */}
-              <div className="mt-10 flex gap-2">
+              <div className="mt-10 hidden lg:flex gap-2">
                 {projects.map((_, i) => (
                   <ProgressDot key={i} index={i} scrollYProgress={scrollYProgress} total={projects.length} />
                 ))}
