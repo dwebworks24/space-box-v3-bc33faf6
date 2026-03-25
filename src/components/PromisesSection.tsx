@@ -3,7 +3,6 @@ import { useRef } from "react";
 import { Shield, Clock, Gem, Handshake, Leaf, HeartHandshake } from "lucide-react";
 import shapeImg from "@/assets/about-v1-shape1.png";
 import circleShape2 from "@/assets/site-footer-two-shape-2.png";
-import ctaBg from "@/assets/cta-bg.jpg";
 import AnimatedTitle from "./AnimatedTitle";
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -64,12 +63,7 @@ const PromisesSection = () => {
   const circleY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 border-t border-white/10 relative overflow-hidden">
-      {/* Background image with overlay */}
-      <div className="absolute inset-0">
-        <img src={ctaBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/75" />
-      </div>
+    <section ref={sectionRef} className="py-20 md:py-28 border-t border-white/10 relative overflow-hidden" style={{ background: "linear-gradient(160deg, hsl(260 8% 22%) 0%, hsl(320 18% 38%) 50%, hsl(330 22% 45%) 100%)" }}>
       {/* Background decorative shapes */}
       <motion.img src={shapeImg} alt="" className="absolute -top-16 -right-16 w-[400px] lg:w-[500px] pointer-events-none opacity-50 rotate-180" style={{ y: shapeY }} />
       <motion.img src={circleShape2} alt="" className="absolute -bottom-16 -left-10 w-[280px] lg:w-[380px] pointer-events-none opacity-50" style={{ y: circleY }} />

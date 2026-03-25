@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import ctaBg from "@/assets/cta-bg.jpg";
 import {
   Accordion,
   AccordionContent,
@@ -44,11 +43,7 @@ const faqs = [
 
 export default function FAQSection() {
   return (
-    <section className="py-20 md:py-28 relative overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={ctaBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/75" />
-      </div>
+    <section className="py-20 md:py-28" style={{ background: "linear-gradient(160deg, hsl(260 8% 22%) 0%, hsl(320 18% 38%) 50%, hsl(330 22% 45%) 100%)" }}>
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
         <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-20 items-start">
           {/* Left – heading */}
