@@ -69,7 +69,7 @@ const StatsSection = () => {
         style={{ y: bgY }}
       >
         <img
-          src={ctaBg}
+          src={statsBg}
           alt=""
           className="w-full h-full object-cover"
         />
