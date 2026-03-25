@@ -44,7 +44,17 @@ const faqs = [
 
 export default function FAQSection() {
   return (
-    <section className="py-20 md:py-28" style={{ background: "linear-gradient(160deg, hsl(260 8% 22%) 0%, hsl(320 18% 38%) 50%, hsl(330 22% 45%) 100%)" }}>
+    <section className="relative py-20 md:py-28 overflow-hidden" style={{ background: "linear-gradient(160deg, hsl(260 8% 22%) 0%, hsl(320 18% 38%) 50%, hsl(330 22% 45%) 100%)" }}>
+      {/* Bottom-left decorative shape */}
+      <motion.img
+        src={faqShape}
+        alt=""
+        className="absolute bottom-0 left-0 w-48 md:w-72 lg:w-96 opacity-[0.07] pointer-events-none select-none"
+        initial={{ opacity: 0, x: -40, y: 40 }}
+        whileInView={{ opacity: 0.07, x: 0, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+      />
       <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
         <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-20 items-start">
           {/* Left – heading */}
