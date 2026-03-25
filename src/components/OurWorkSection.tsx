@@ -73,7 +73,7 @@ const OurWorkSection = () => {
           className="block text-[6rem] sm:text-[8rem] md:text-[10rem] lg:text-[14rem] font-bold uppercase leading-none whitespace-nowrap"
           style={{
             fontFamily: "var(--font-serif)",
-            WebkitTextStroke: "2px hsl(var(--primary-foreground) / 0.15)",
+            WebkitTextStroke: "2px hsl(var(--primary-foreground) / 0.30)",
             color: "transparent",
             writingMode: "vertical-lr",
             lineHeight: 0.85,
