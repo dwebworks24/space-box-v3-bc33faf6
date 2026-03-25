@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import faqShape from "@/assets/faq-shape.png";
 import {
   Accordion,
   AccordionContent,
