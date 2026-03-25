@@ -68,7 +68,7 @@ const OurWorkSection = () => {
       <img src={circleShape1} alt="" className="absolute bottom-0 right-0 w-[250px] opacity-30 pointer-events-none" />
 
       {/* Background watermark text */}
-      <div className="absolute top-1/2 left-4 sm:left-8 -translate-y-1/2 pointer-events-none select-none z-0">
+      <div className="absolute top-1/2 left-4 sm:left-8 -translate-y-1/2 pointer-events-none select-none z-0 hidden sm:block">
         <span
           className="block text-[6rem] sm:text-[8rem] md:text-[10rem] lg:text-[14rem] font-bold uppercase leading-none whitespace-nowrap"
           style={{
