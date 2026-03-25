@@ -121,7 +121,7 @@ const OurWorkSection = () => {
             </motion.div>
 
             {/* Right: Scrolling projects */}
-            <div className="relative h-[80vh] sm:h-[65vh] lg:h-[calc(100vh-120px)] overflow-hidden py-14 sm:pb-10">
+            <div className="relative h-[80vh] sm:h-[65vh] lg:h-[calc(100vh-120px)] overflow-hidden pt-4 pb-4 sm:pt-6 sm:pb-10">
               <motion.div
                 style={{ y: translateY }}
                 className="flex flex-col"
