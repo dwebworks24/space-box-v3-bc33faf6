@@ -64,8 +64,8 @@ const OurWorkSection = () => {
     >
       {/* Background texture */}
       <img src={sectionShape} alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.08] pointer-events-none" />
-      <img src="/images/about-v1-shape1-2.png" alt="" className="absolute top-0 left-0 w-[350px] md:w-[450px] opacity-50 pointer-events-none" />
-      <img src={circleShape1} alt="" className="absolute bottom-0 right-0 w-[250px] opacity-[0.15] pointer-events-none" />
+      <img src="/images/about-v1-shape1-2.png" alt="" className="absolute top-0 left-0 w-[350px] md:w-[450px] opacity-30 pointer-events-none" />
+      <img src={circleShape1} alt="" className="absolute bottom-0 right-0 w-[250px] opacity-30 pointer-events-none" />
 
       {/* Background watermark text */}
       <div className="absolute top-1/2 left-4 sm:left-8 -translate-y-1/2 pointer-events-none select-none z-0">
