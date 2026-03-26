@@ -532,7 +532,7 @@ export default function ServiceDetail() {
 
       {/* ═══════════ SECTION 6: Prev / Next Navigation ═══════════ */}
       <section className="border-t border-border bg-warm-bg">
-        <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20 grid grid-cols-2">
+        <div className="container mx-auto px-4 sm:px-8 md:px-12 lg:px-16 grid grid-cols-2">
           {prev ? (
             <Link
               to={`/services/${prev.slug}`}
