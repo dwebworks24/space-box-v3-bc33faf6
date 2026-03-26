@@ -514,7 +514,7 @@ export default function ServiceDetail() {
       </section>
 
       {/* ═══════════ SECTION 6: Prev / Next Navigation ═══════════ */}
-      <section className="border-t border-border bg-background">
+      <section className="border-t border-border bg-warm-bg">
         <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20 grid grid-cols-2">
           {prev ? (
             <Link
