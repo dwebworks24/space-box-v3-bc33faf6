@@ -246,7 +246,7 @@ export default function ServiceDetail() {
 
   const prev = index > 0 ? services[index - 1] : null;
   const next = index < services.length - 1 ? services[index + 1] : null;
-  const gallery = getGalleryForService(index);
+  const gallery = getGalleryForService(service.slug);
   const highlights = serviceHighlights[service.slug] || serviceHighlights["interior-consultation"];
   const detailedContent = serviceDetailedContent[service.slug] || serviceDetailedContent["interior-consultation"];
   const extendedDesc = serviceExtendedDesc[service.slug] || serviceExtendedDesc["interior-consultation"];
