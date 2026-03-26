@@ -5,17 +5,13 @@ import {
   ClipboardList, HeadphonesIcon,
   Compass, Layers, Shield, Wrench,
 } from 'lucide-react';
-import teamAmruta from '@/assets/team-amruta.jpg';
-import teamMini from '@/assets/team-mini.jpg';
-import teamPratyusha from '@/assets/team-pratyusha.jpg';
-import teamMockup from '@/assets/team-mockup.jpg';
 import aboutHeroSplit from '@/assets/about-hero-split.jpg';
 import projectResidential from '@/assets/project-residential.jpg';
-import teamBg from '@/assets/team-bg.jpg';
 import AboutCompanySection from '@/components/AboutCompanySection';
 import StatsSection from '@/components/StatsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import SubBanner from '@/components/SubBanner';
+import FoundersSection from '@/components/FoundersSection';
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
