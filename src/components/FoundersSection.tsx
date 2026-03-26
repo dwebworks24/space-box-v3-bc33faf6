@@ -41,11 +41,10 @@ export default function FoundersSection() {
 
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img src={teamBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-primary/90" />
-      </div>
+      {/* Smooth Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-primary/80" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--secondary)/0.15),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,hsl(var(--secondary)/0.1),transparent_50%)]" />
 
       <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Header */}
