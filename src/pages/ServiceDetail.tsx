@@ -55,6 +55,7 @@ import portfolio7 from '@/assets/services/portfolio-7.jpg';
 import portfolio8 from '@/assets/services/portfolio-8.jpg';
 import portfolio9 from '@/assets/services/portfolio-9.jpg';
 import portfolio10 from '@/assets/services/portfolio-10.jpg';
+import darkshellBg from '@/assets/services/darkshell-bg.jpg';
 
 // Each service gets a unique set of portfolio images — no repeats across services
 const servicePortfolioImages: Record<string, string[]> = {
@@ -589,14 +590,20 @@ function SampleWorksCarousel({ gallery, serviceTitle, fadeUp }: { gallery: strin
   const labels = ['Living Interiors', 'Workspace Interiors', 'Reception Interiors', 'Modern Interiors', 'Classic Interiors', 'Contemporary Interiors'];
 
   return (
-    <section className="py-10 lg:py-16 relative overflow-hidden bg-[#0a0a0a]">
-      {/* Dark glossy gradient background blend */}
+    <section className="py-10 lg:py-16 relative overflow-hidden bg-[#050505]">
+      {/* Darkshell background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111113] to-[#0a0a0a]" />
-        <div className="absolute top-[-40%] right-[-20%] w-[80%] h-[80%] rounded-full bg-gradient-to-bl from-white/[0.04] via-white/[0.02] to-transparent blur-3xl" />
-        <div className="absolute bottom-[-30%] left-[-10%] w-[60%] h-[60%] rounded-full bg-gradient-to-tr from-white/[0.03] via-transparent to-transparent blur-3xl" />
-        <div className="absolute top-[20%] left-[30%] w-[40%] h-[50%] rounded-full bg-gradient-to-b from-white/[0.015] to-transparent blur-2xl" />
-        {/* Subtle glossy arc highlight */}
+        <img
+          src={darkshellBg}
+          alt=""
+          className="w-full h-full object-cover opacity-40"
+          loading="lazy"
+          width={1920}
+          height={1080}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-transparent to-[#050505]/80" />
+        {/* Subtle top/bottom edge highlights */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
       </div>
