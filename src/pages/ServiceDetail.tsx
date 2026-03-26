@@ -386,8 +386,8 @@ export default function ServiceDetail() {
       </section>
 
       {/* ═══════════ SECTION 3: Consultation / Booking Form ═══════════ */}
-      <section className="py-16 lg:py-24 bg-warm-bg">
-        <div className="container mx-auto px-4 sm:px-10 md:px-14 lg:px-20">
+      <section className="py-10 lg:py-16 bg-warm-bg">
+        <div className="container mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
           <motion.div
             className="max-w-3xl mx-auto bg-warm-bg border border-border rounded-2xl p-5 sm:p-8 md:p-12 shadow-sm"
             {...fadeUp}
