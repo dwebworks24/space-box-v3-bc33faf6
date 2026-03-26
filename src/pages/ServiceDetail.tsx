@@ -12,30 +12,45 @@ import { isValidPhone, getPhoneError } from '@/lib/phoneValidation';
 
 const RECAPTCHA_SITE_KEY = '6LfT-YYsAAAAANH5sGA7t-a8BuWMt_F4FMhkTRBh';
 
-// Gallery images
-import c1Cabin from '@/assets/projects/c1-cabin.jpg';
-import c1Cafeteria from '@/assets/projects/c1-cafeteria.jpg';
-import c1Conference from '@/assets/projects/c1-conference.jpg';
-import c1Lobby from '@/assets/projects/c1-lobby.jpg';
-import c1Meeting from '@/assets/projects/c1-meeting.jpg';
-import c1Reception from '@/assets/projects/c1-reception-1.jpg';
-import c1Workarea from '@/assets/projects/c1-workarea.jpg';
-import c2Conference from '@/assets/projects/c2-conference.jpg';
-import c2Lounge from '@/assets/projects/c2-lounge.jpg';
-import c2Reception from '@/assets/projects/c2-reception.jpg';
-import r1Drawing from '@/assets/projects/r1-drawing-room.jpg';
-import r1Entrance from '@/assets/projects/r1-entrance.jpg';
-import r1Bedroom from '@/assets/projects/r1-master-bedroom.jpg';
-import r2Drawing from '@/assets/projects/r2-drawing-room.jpg';
-import r2Kitchen from '@/assets/projects/r2-kitchen.jpg';
-import r2Bedroom from '@/assets/projects/r2-master-bedroom.jpg';
+// Service-specific hero images
+import residentialHero from '@/assets/services/residential-hero.jpg';
+import commercialHero from '@/assets/services/commercial-hero.jpg';
+import spacePlanningHero from '@/assets/services/space-planning-hero.jpg';
+import materialColorHero from '@/assets/services/material-color-hero.jpg';
+import projectExecutionHero from '@/assets/services/project-execution-hero.jpg';
 
-const allGallery = [c1Cabin, c1Cafeteria, c1Conference, c1Lobby, c1Meeting, c1Reception, c1Workarea, c2Conference, c2Lounge, c2Reception, r1Drawing, r1Entrance, r1Bedroom, r2Drawing, r2Kitchen, r2Bedroom];
+// Detail images
+import detailBedroom from '@/assets/services/detail-bedroom.jpg';
+import detailKitchen from '@/assets/services/detail-kitchen.jpg';
+import detailDining from '@/assets/services/detail-dining.jpg';
+import detailReception from '@/assets/services/detail-reception.jpg';
+import detailConference from '@/assets/services/detail-conference.jpg';
+
+// Service hero image map
+const serviceHeroImages: Record<string, string> = {
+  "residential-interior-design": residentialHero,
+  "commercial-interior-design": commercialHero,
+  "space-planning-concept-development": spacePlanningHero,
+  "material-color-consultation": materialColorHero,
+  "end-to-end-project-execution": projectExecutionHero,
+};
+
+// Service detail (second) image map
+const serviceDetailImages: Record<string, string> = {
+  "residential-interior-design": detailBedroom,
+  "commercial-interior-design": detailReception,
+  "space-planning-concept-development": detailKitchen,
+  "material-color-consultation": detailDining,
+  "end-to-end-project-execution": detailConference,
+};
+
+// Gallery images for carousel
+const galleryImages = [residentialHero, commercialHero, detailBedroom, detailKitchen, detailDining, detailReception, detailConference, spacePlanningHero, materialColorHero, projectExecutionHero];
 
 function getGalleryForService(index: number) {
-  const start = (index * 3) % allGallery.length;
+  const start = (index * 2) % galleryImages.length;
   const imgs: string[] = [];
-  for (let i = 0; i < 3; i++) imgs.push(allGallery[(start + i) % allGallery.length]);
+  for (let i = 0; i < 3; i++) imgs.push(galleryImages[(start + i) % galleryImages.length]);
   return imgs;
 }
 
