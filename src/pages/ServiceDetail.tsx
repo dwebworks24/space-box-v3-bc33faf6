@@ -592,7 +592,7 @@ export default function ServiceDetail() {
 }
 
 /* ═══════════ Sample Works Carousel Component ═══════════ */
-function SampleWorksCarousel({ gallery, serviceTitle, fadeUp }: { gallery: string[]; serviceTitle: string; fadeUp: any }) {
+function SampleWorksCarousel({ gallery, serviceTitle, fadeUp, slug }: { gallery: string[]; serviceTitle: string; fadeUp: any; slug: string }) {
   const allImages = gallery; // unique images, no duplication
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start', slidesToScroll: 1 });
 
