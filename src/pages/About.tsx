@@ -348,63 +348,45 @@ export default function About() {
             {founders.map((f, i) => (
               <motion.div
                 key={f.name}
-                variants={cardPop(i)}
-                initial="hidden"
-                whileInView="visible"
+                initial={{ opacity: 0, x: i === 0 ? -80 : i === 2 ? 80 : 0, y: i === 1 ? 60 : 0 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.8, delay: i * 0.2, ease: easeOut }}
                 className="group"
               >
                 <motion.div
-                  className="relative bg-primary-foreground/5 backdrop-blur-sm border border-primary-foreground/10 rounded-2xl p-8 h-full flex flex-col items-center text-center overflow-hidden transition-all duration-500 hover:border-secondary/40 hover:bg-primary-foreground/10"
+                  className="relative rounded-2xl overflow-hidden border border-primary-foreground/10 hover:border-secondary/40 transition-all duration-500"
                   whileHover={{ y: -10, scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 260, damping: 20 }}
                 >
-                  {/* Glow effect on hover */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: 'radial-gradient(circle at 50% 0%, hsl(var(--secondary) / 0.15) 0%, transparent 60%)' }}
-                  />
-
-                  {/* Avatar */}
-                  <motion.div
-                    className="relative mb-6 z-10"
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
-                  >
-                    <div className="w-28 h-28 rounded-full overflow-hidden border-[3px] border-secondary/40 group-hover:border-secondary transition-colors duration-500 shadow-lg">
-                      <img src={f.image} alt={f.name} className="w-full h-full object-cover" />
-                    </div>
-                    {/* Pulse ring */}
-                    <motion.div
-                      className="absolute inset-0 rounded-full border-2 border-secondary/0 group-hover:border-secondary/30"
-                      animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0, 0.4] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  {/* Full image */}
+                  <div className="aspect-[3/4] overflow-hidden">
+                    <img
+                      src={f.image}
+                      alt={f.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                  </motion.div>
-
-                  {/* Name & Role — always visible */}
-                  <h3 className="text-xl font-bold text-primary-foreground mb-1 z-10 relative">{f.name}</h3>
-                  <p className="text-secondary text-sm font-body mb-4 z-10 relative">{f.role}</p>
-
-                  {/* Divider */}
-                  <motion.div
-                    className="h-px w-12 bg-secondary/40 mb-4 z-10"
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.15 + 0.4, duration: 0.5, ease: easeOut }}
-                  />
-
-                  {/* Bio — reveals on hover with smooth expand */}
-                  <div className="z-10 relative overflow-hidden transition-all duration-500 ease-out max-h-0 group-hover:max-h-[300px] opacity-0 group-hover:opacity-100">
-                    <p className="text-primary-foreground/70 text-sm font-body leading-relaxed">
-                      {f.bio}
-                    </p>
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
                   </div>
 
-                  {/* Hint text when not hovered */}
-                  <p className="text-primary-foreground/30 text-xs font-body mt-2 z-10 group-hover:opacity-0 transition-opacity duration-300">
-                    Hover to read more
-                  </p>
+                  {/* Content overlay at bottom */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="text-xl font-bold text-primary-foreground mb-1">{f.name}</h3>
+                    <p className="text-secondary text-sm font-body mb-3">{f.role}</p>
+
+                    {/* Bio — slides up on hover */}
+                    <div className="overflow-hidden transition-all duration-500 ease-out max-h-0 group-hover:max-h-[250px] opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0">
+                      <motion.div className="h-px w-10 bg-secondary/50 mb-3" />
+                      <p className="text-primary-foreground/70 text-sm font-body leading-relaxed">
+                        {f.bio}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Corner accents on hover */}
+                  <div className="absolute top-3 right-3 w-14 h-14 border-t-2 border-r-2 border-secondary/40 rounded-tr-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-3 left-3 w-14 h-14 border-b-2 border-l-2 border-secondary/40 rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </motion.div>
               </motion.div>
             ))}
