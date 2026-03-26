@@ -55,6 +55,7 @@ import portfolio7 from '@/assets/services/portfolio-7.jpg';
 import portfolio8 from '@/assets/services/portfolio-8.jpg';
 import portfolio9 from '@/assets/services/portfolio-9.jpg';
 import portfolio10 from '@/assets/services/portfolio-10.jpg';
+import darkshellBg from '@/assets/services/darkshell-bg.jpg';
 
 // Each service gets a unique set of portfolio images — no repeats across services
 const servicePortfolioImages: Record<string, string[]> = {
