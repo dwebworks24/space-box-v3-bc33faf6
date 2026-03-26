@@ -5,17 +5,13 @@ import {
   ClipboardList, HeadphonesIcon,
   Compass, Layers, Shield, Wrench,
 } from 'lucide-react';
-import teamAmruta from '@/assets/team-amruta.jpg';
-import teamMini from '@/assets/team-mini.jpg';
-import teamPratyusha from '@/assets/team-pratyusha.jpg';
-import teamMockup from '@/assets/team-mockup.jpg';
 import aboutHeroSplit from '@/assets/about-hero-split.jpg';
 import projectResidential from '@/assets/project-residential.jpg';
-import teamBg from '@/assets/team-bg.jpg';
 import AboutCompanySection from '@/components/AboutCompanySection';
 import StatsSection from '@/components/StatsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import SubBanner from '@/components/SubBanner';
+import FoundersSection from '@/components/FoundersSection';
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -87,28 +83,6 @@ const timeline = [
     year: '2026',
     title: 'Spacebox Concepts LLP',
     details: ['2000 sq ft Office', '12+ Team Members', ' 75+ Projects Completed', ' 400,000+ sq ft Executed'],
-  },
-];
-
-/* ── Founders ── */
-const founders = [
-  {
-    name: 'Amruta Desai',
-    role: 'Managing Director, Finance & Strategy',
-    bio: 'Amruta Desai is a strategic finance and business operations leader with extensive experience in corporate planning, budgeting, and organizational growth. As Managing Director at Spacebox Concepts, she oversees financial strategy, resource allocation, and long-term business development. Her analytical mindset and structured approach to decision-making ensure sustainable growth and operational efficiency across all verticals.',
-    image: teamMockup,
-  },
-  {
-    name: 'Mini Khapekar',
-    role: 'Managing Partner, Spacebox Concepts',
-    bio: 'Mini Khapekar is a seasoned technology and operations leader with 19 years of experience in the IT industry and over a decade in management. As Managing Partner at Spacebox Concepts, she plays a pivotal role in driving operations, administration, and execution across the organization. She brings a structured, process-driven approach ensuring every project is delivered with efficiency, precision, and high quality standards.',
-    image: teamMockup,
-  },
-  {
-    name: 'Prathyusha Ravula',
-    role: 'Interior Design Lead & Founder',
-    bio: 'Prathyusha Ravula is a passionate interior designer with 8 years of professional experience delivering refined, functional, and timeless interiors. Known for a detail-driven approach and client-focused design philosophy, she specializes in creating spaces that balance aesthetics, comfort, and individuality.',
-    image: teamMockup,
   },
 ];
 
@@ -319,91 +293,7 @@ export default function About() {
       </section>
 
       {/* ═══════ MEET THE FOUNDERS ═══════ */}
-      <section className="relative py-24 lg:py-32 overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0">
-          <img src={teamBg} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-primary/90" />
-        </div>
-
-        <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
-          {/* Header */}
-          <motion.div
-            className="text-center mb-20"
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <motion.p variants={fadeUp} className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
-              The Minds Behind Spacebox
-            </motion.p>
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl lg:text-6xl text-primary-foreground">
-              Meet the <span className="text-secondary">Founders</span>
-            </motion.h2>
-          </motion.div>
-
-          {/* Founder Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-            {founders.map((f, i) => (
-              <motion.div
-                key={f.name}
-                initial={{ opacity: 0, x: i === 0 ? -80 : i === 2 ? 80 : 0, y: i === 1 ? 60 : 0 }}
-                whileInView={{ opacity: 1, x: 0, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.8, delay: i * 0.2, ease: easeOut }}
-                className="group"
-              >
-                <motion.div
-                  className="relative rounded-2xl overflow-hidden border border-primary-foreground/10 hover:border-secondary/40 transition-all duration-500"
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                >
-                  {/* Full image */}
-                  <div className="aspect-[3/4] overflow-hidden">
-                    <img
-                      src={f.image}
-                      alt={f.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
-                  </div>
-
-                  {/* Content overlay at bottom */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-xl font-bold text-primary-foreground mb-1">{f.name}</h3>
-                    <p className="text-secondary text-sm font-body mb-3">{f.role}</p>
-
-                    {/* Bio — slides up on hover */}
-                    <div className="overflow-hidden transition-all duration-500 ease-out max-h-0 group-hover:max-h-[250px] opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0">
-                      <motion.div className="h-px w-10 bg-secondary/50 mb-3" />
-                      <p className="text-primary-foreground/70 text-sm font-body leading-relaxed">
-                        {f.bio}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Corner accents on hover */}
-                  <div className="absolute top-3 right-3 w-14 h-14 border-t-2 border-r-2 border-secondary/40 rounded-tr-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-3 left-3 w-14 h-14 border-b-2 border-l-2 border-secondary/40 rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.p
-            className="text-center text-primary-foreground/40 font-body mt-16 text-sm"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-          >
-            12+ In-house Designers, Design Managers, Execution Managers & Sales Managers driving innovation.
-          </motion.p>
-        </div>
-      </section>
-
+      <FoundersSection />
       {/* ═══════ TESTIMONIALS (reuse homepage) ═══════ */}
       <TestimonialsSection />
     </div>
