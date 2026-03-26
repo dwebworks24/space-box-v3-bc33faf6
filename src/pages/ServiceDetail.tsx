@@ -606,7 +606,7 @@ function SampleWorksCarousel({ gallery, serviceTitle, fadeUp, slug }: { gallery:
       {/* Darkshell background */}
       <div className="absolute inset-0">
         <img
-          src={darkshellBg}
+          src={serviceDarkshellBg[slug] || darkshellBg}
           alt=""
           className="w-full h-full object-cover opacity-40"
           loading="lazy"
