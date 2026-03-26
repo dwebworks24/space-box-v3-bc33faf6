@@ -44,14 +44,29 @@ const serviceDetailImages: Record<string, string> = {
   "end-to-end-project-execution": detailConference,
 };
 
-// Gallery images for carousel
-const galleryImages = [residentialHero, commercialHero, detailBedroom, detailKitchen, detailDining, detailReception, detailConference, spacePlanningHero, materialColorHero, projectExecutionHero];
+// Portfolio images (unique per service, no repeats)
+import portfolio1 from '@/assets/services/portfolio-1.jpg';
+import portfolio2 from '@/assets/services/portfolio-2.jpg';
+import portfolio3 from '@/assets/services/portfolio-3.jpg';
+import portfolio4 from '@/assets/services/portfolio-4.jpg';
+import portfolio5 from '@/assets/services/portfolio-5.jpg';
+import portfolio6 from '@/assets/services/portfolio-6.jpg';
+import portfolio7 from '@/assets/services/portfolio-7.jpg';
+import portfolio8 from '@/assets/services/portfolio-8.jpg';
+import portfolio9 from '@/assets/services/portfolio-9.jpg';
+import portfolio10 from '@/assets/services/portfolio-10.jpg';
 
-function getGalleryForService(index: number) {
-  const start = (index * 2) % galleryImages.length;
-  const imgs: string[] = [];
-  for (let i = 0; i < 3; i++) imgs.push(galleryImages[(start + i) % galleryImages.length]);
-  return imgs;
+// Each service gets a unique set of portfolio images — no repeats across services
+const servicePortfolioImages: Record<string, string[]> = {
+  "residential-interior-design": [portfolio1, portfolio2, portfolio5, portfolio6, portfolio8, portfolio10],
+  "commercial-interior-design": [portfolio3, portfolio4, portfolio7, portfolio9, detailReception, detailConference],
+  "space-planning-concept-development": [portfolio1, portfolio3, portfolio5, portfolio9, spacePlanningHero, detailKitchen],
+  "material-color-consultation": [portfolio2, portfolio4, portfolio6, portfolio10, materialColorHero, detailDining],
+  "end-to-end-project-execution": [portfolio7, portfolio8, portfolio9, portfolio3, projectExecutionHero, detailConference],
+};
+
+function getGalleryForService(slug: string) {
+  return servicePortfolioImages[slug] || [portfolio1, portfolio2, portfolio3, portfolio4, portfolio5, portfolio6];
 }
 
 // ── Service Highlights (3 per service) ──
