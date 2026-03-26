@@ -321,12 +321,13 @@ export default function ServiceDetail() {
           </div>
 
           {/* Row 2: Image left, Text right (detailed content) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <motion.div {...fadeUp} className="order-2 lg:order-1">
               <img
-                src={gallery[0]}
+                src={serviceDetailImages[service.slug] || gallery[0]}
                 alt={`${service.title} detail`}
                 className="w-full h-[300px] lg:h-[420px] object-cover rounded-xl"
+                loading="lazy"
               />
             </motion.div>
             <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.15 }} className="order-1 lg:order-2">
