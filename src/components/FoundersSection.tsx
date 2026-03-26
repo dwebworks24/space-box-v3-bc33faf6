@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import teamMockup from '@/assets/team-mockup.jpg';
-import teamBg from '@/assets/team-bg.jpg';
+
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -41,11 +41,10 @@ export default function FoundersSection() {
 
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img src={teamBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-primary/90" />
-      </div>
+      {/* Smooth Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-primary/80" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--secondary)/0.15),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,hsl(var(--secondary)/0.1),transparent_50%)]" />
 
       <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Header */}
@@ -154,24 +153,24 @@ export default function FoundersSection() {
         </div>
 
         {/* Mobile — stacked cards */}
-        <div className="md:hidden space-y-5">
+        <div className="md:hidden space-y-6">
           {founders.map((f, i) => (
             <motion.div
               key={f.name}
-              className="relative rounded-2xl overflow-hidden border border-primary-foreground/10"
+              className="rounded-2xl overflow-hidden border border-primary-foreground/10 bg-primary/60 backdrop-blur-sm"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.15, ease: easeOut }}
             >
-              <div className="aspect-[4/5] overflow-hidden">
+              <div className="aspect-[3/2] overflow-hidden">
                 <img src={f.image} alt={f.name} className="w-full h-full object-cover object-top" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent" />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-5">
+              <div className="p-5">
                 <h3 className="text-lg font-bold text-primary-foreground mb-1">{f.name}</h3>
-                <p className="text-secondary text-xs font-body mb-2">{f.role}</p>
-                <p className="text-primary-foreground/60 text-xs font-body leading-relaxed line-clamp-4">{f.bio}</p>
+                <p className="text-secondary text-xs font-body mb-3">{f.role}</p>
+                <div className="h-px w-10 bg-secondary/40 mb-3" />
+                <p className="text-primary-foreground/70 text-sm font-body leading-relaxed">{f.bio}</p>
               </div>
             </motion.div>
           ))}
