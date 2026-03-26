@@ -350,17 +350,17 @@ export default function ServiceDetail() {
       </section>
 
       {/* ═══════════ SECTION 2: Service Highlights (3 cards) ═══════════ */}
-      <section ref={highlightsRef} className="relative py-16 lg:py-24 overflow-hidden">
+      <section ref={highlightsRef} className="relative py-10 lg:py-16 overflow-hidden">
         {/* Parallax bg image */}
         <motion.div
           className="absolute inset-[-20%]"
           style={{ y: heroY, scale: heroScale }}
         >
-          <img src={service.image} alt="" className="w-full h-full object-cover" />
+          <img src={serviceHeroImages[service.slug] || service.image} alt="" className="w-full h-full object-cover" />
         </motion.div>
         <div className="absolute inset-0 bg-black/70" />
 
-        <div className="relative z-10 container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
+        <div className="relative z-10 container mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
           <motion.div className="text-center mb-14" {...fadeUp}>
             <p className="text-secondary text-[13px] uppercase tracking-[3px] mb-3 font-display font-semibold">Highlights</p>
             <h2 className="font-display text-3xl md:text-4xl text-white font-semibold">Service Highlights</h2>
