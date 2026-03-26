@@ -90,24 +90,24 @@ const timeline = [
   },
 ];
 
-/* ── Team ── */
-const partners = [
+/* ── Founders ── */
+const founders = [
   {
-    name: 'Pratyusha Ravula',
-    role: 'Principal Designer & Founder',
-    bio: 'Visionary designer with 7+ years of creating transformative interior spaces.',
+    name: 'Amruta Desai',
+    role: 'Managing Director, Finance & Strategy',
+    bio: 'Amruta Desai is a strategic finance and business operations leader with extensive experience in corporate planning, budgeting, and organizational growth. As Managing Director at Spacebox Concepts, she oversees financial strategy, resource allocation, and long-term business development. Her analytical mindset and structured approach to decision-making ensure sustainable growth and operational efficiency across all verticals.',
     image: teamMockup,
   },
   {
     name: 'Mini Khapekar',
-    role: 'Managing Director, Operations & Execution',
-    bio: 'Operations expert ensuring flawless project delivery every time.',
+    role: 'Managing Partner, Spacebox Concepts',
+    bio: 'Mini Khapekar is a seasoned technology and operations leader with 19 years of experience in the IT industry and over a decade in management. As Managing Partner at Spacebox Concepts, she plays a pivotal role in driving operations, administration, and execution across the organization. She brings a structured, process-driven approach ensuring every project is delivered with efficiency, precision, and high quality standards.',
     image: teamMockup,
   },
   {
-    name: 'Amruta Desai',
-    role: 'Managing Director, Finance & Strategy',
-    bio: 'Strategic leader driving financial excellence and sustainable growth.',
+    name: 'Prathyusha Ravula',
+    role: 'Interior Design Lead & Founder',
+    bio: 'Prathyusha Ravula is a passionate interior designer with 8 years of professional experience delivering refined, functional, and timeless interiors. Known for a detail-driven approach and client-focused design philosophy, she specializes in creating spaces that balance aesthetics, comfort, and individuality.',
     image: teamMockup,
   },
 ];
