@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import teamMockup from '@/assets/team-mockup.jpg';
-import teamBg from '@/assets/team-bg.jpg';
+
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
