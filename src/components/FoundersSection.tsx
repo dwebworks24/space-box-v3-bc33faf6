@@ -7,9 +7,9 @@ const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const founders = [
   {
-    name: 'Amruta Desai',
-    role: 'Managing Director, Finance & Strategy',
-    bio: 'Amruta Desai is a strategic finance and business operations leader with extensive experience in corporate planning, budgeting, and organizational growth. As Managing Director at Spacebox Concepts, she oversees financial strategy, resource allocation, and long-term business development. Her analytical mindset and structured approach to decision-making ensure sustainable growth and operational efficiency across all verticals.',
+    name: 'Prathyusha Ravula',
+    role: 'Interior Design Lead & Founder',
+    bio: 'Prathyusha Ravula is a passionate interior designer with 8 years of professional experience delivering refined, functional, and timeless interiors. Known for a detail-driven approach and client-focused design philosophy, she specializes in creating spaces that balance aesthetics, comfort, and individuality.',
     image: teamMockup,
   },
   {
@@ -19,9 +19,9 @@ const founders = [
     image: teamMockup,
   },
   {
-    name: 'Prathyusha Ravula',
-    role: 'Interior Design Lead & Founder',
-    bio: 'Prathyusha Ravula is a passionate interior designer with 8 years of professional experience delivering refined, functional, and timeless interiors. Known for a detail-driven approach and client-focused design philosophy, she specializes in creating spaces that balance aesthetics, comfort, and individuality.',
+    name: 'Amruta Desai',
+    role: 'Managing Director, Finance & Strategy',
+    bio: 'Amruta Desai is a strategic finance and business operations leader with extensive experience in corporate planning, budgeting, and organizational growth. As Managing Director at Spacebox Concepts, she oversees financial strategy, resource allocation, and long-term business development. Her analytical mindset and structured approach to decision-making ensure sustainable growth and operational efficiency across all verticals.',
     image: teamMockup,
   },
 ];
