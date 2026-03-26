@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
   MessageSquare, Box, Maximize, Palette, Sofa, Lamp, Frame,
   ClipboardList, HeadphonesIcon,
-  Compass, Layers, Shield, Wrench, Facebook, Twitter, Linkedin, Instagram
+  Compass, Layers, Shield, Wrench,
 } from 'lucide-react';
 import teamAmruta from '@/assets/team-amruta.jpg';
 import teamMini from '@/assets/team-mini.jpg';
@@ -90,24 +90,24 @@ const timeline = [
   },
 ];
 
-/* ── Team ── */
-const partners = [
+/* ── Founders ── */
+const founders = [
   {
-    name: 'Pratyusha Ravula',
-    role: 'Principal Designer & Founder',
-    bio: 'Visionary designer with 7+ years of creating transformative interior spaces.',
+    name: 'Amruta Desai',
+    role: 'Managing Director, Finance & Strategy',
+    bio: 'Amruta Desai is a strategic finance and business operations leader with extensive experience in corporate planning, budgeting, and organizational growth. As Managing Director at Spacebox Concepts, she oversees financial strategy, resource allocation, and long-term business development. Her analytical mindset and structured approach to decision-making ensure sustainable growth and operational efficiency across all verticals.',
     image: teamMockup,
   },
   {
     name: 'Mini Khapekar',
-    role: 'Managing Director, Operations & Execution',
-    bio: 'Operations expert ensuring flawless project delivery every time.',
+    role: 'Managing Partner, Spacebox Concepts',
+    bio: 'Mini Khapekar is a seasoned technology and operations leader with 19 years of experience in the IT industry and over a decade in management. As Managing Partner at Spacebox Concepts, she plays a pivotal role in driving operations, administration, and execution across the organization. She brings a structured, process-driven approach ensuring every project is delivered with efficiency, precision, and high quality standards.',
     image: teamMockup,
   },
   {
-    name: 'Amruta Desai',
-    role: 'Managing Director, Finance & Strategy',
-    bio: 'Strategic leader driving financial excellence and sustainable growth.',
+    name: 'Prathyusha Ravula',
+    role: 'Interior Design Lead & Founder',
+    bio: 'Prathyusha Ravula is a passionate interior designer with 8 years of professional experience delivering refined, functional, and timeless interiors. Known for a detail-driven approach and client-focused design philosophy, she specializes in creating spaces that balance aesthetics, comfort, and individuality.',
     image: teamMockup,
   },
 ];
@@ -318,101 +318,106 @@ export default function About() {
         </div>
       </section>
 
-      {/* ═══════ TEAM SECTION ═══════ */}
+      {/* ═══════ MEET THE FOUNDERS ═══════ */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        {/* Background image */}
+        {/* Background */}
         <div className="absolute inset-0">
           <img src={teamBg} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-primary/85" />
+          <div className="absolute inset-0 bg-primary/90" />
         </div>
-        <div className="relative max-w-[1600px] mx-auto px-6 lg:px-12">
+
+        <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
+          {/* Header */}
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-20"
             variants={stagger}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
             <motion.p variants={fadeUp} className="text-secondary text-sm uppercase tracking-[0.3em] mb-4 font-body">
-              Leadership
+              The Minds Behind Spacebox
             </motion.p>
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl text-primary-foreground">
-              Meet Our Professional <span className="text-secondary">Team</span>
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl lg:text-6xl text-primary-foreground">
+              Meet the <span className="text-secondary">Founders</span>
             </motion.h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {partners.map((p, i) => (
+          {/* Founder Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+            {founders.map((f, i) => (
               <motion.div
-                key={p.name}
+                key={f.name}
                 variants={cardPop(i)}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }}
-                whileHover={{ y: -8 }}
-                className="group relative pb-12"
+                viewport={{ once: true, margin: '-60px' }}
+                className="group"
               >
-                {/* Photo card */}
-                <div className="relative overflow-hidden rounded-xl">
-                  {/* Photo placeholder with gradient */}
-                  <div className="aspect-[3/4] relative overflow-hidden">
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      className="w-full h-full object-cover"
-                    />
-                    {/* Decorative corner accents */}
-                    <div className="absolute top-3 right-3 w-16 h-16 border-t-2 border-r-2 border-secondary/40 rounded-tr-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="absolute bottom-3 left-3 w-16 h-16 border-b-2 border-l-2 border-secondary/40 rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  </div>
-
-                  {/* Name banner - angled overlay at bottom */}
-                  <div className="absolute bottom-0 left-0 right-0">
-                    <div className="relative">
-                      <div className="bg-secondary/90 backdrop-blur-sm px-6 py-5 clip-diagonal">
-                        <h3 className="text-primary-foreground font-bold text-lg tracking-wide uppercase font-body">
-                          {p.name}
-                        </h3>
-                        <p className="text-primary-foreground/80 text-sm font-body mt-1">
-                          {p.role}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Social icons - hidden by default, float up on card hover */}
                 <motion.div
-                  className="absolute -bottom-2 left-0 right-0 flex items-center justify-center gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400 ease-out"
+                  className="relative bg-primary-foreground/5 backdrop-blur-sm border border-primary-foreground/10 rounded-2xl p-8 h-full flex flex-col items-center text-center overflow-hidden transition-all duration-500 hover:border-secondary/40 hover:bg-primary-foreground/10"
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 20 }}
                 >
-                  {[
-                    { icon: Facebook, href: '#' },
-                    { icon: Twitter, href: '#' },
-                    { icon: Linkedin, href: '#' },
-                    { icon: Instagram, href: '#' },
-                  ].map(({ icon: SIcon, href }, idx) => (
-                    <a
-                      key={idx}
-                      href={href}
-                      className="w-9 h-9 rounded-full border border-primary-foreground/30 bg-primary/80 backdrop-blur-sm flex items-center justify-center hover:border-secondary hover:bg-secondary/20 transition-all duration-300"
-                      style={{ transitionDelay: `${idx * 60}ms` }}
-                    >
-                      <SIcon className="w-4 h-4 text-primary-foreground/70 hover:text-secondary transition-colors" />
-                    </a>
-                  ))}
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{ background: 'radial-gradient(circle at 50% 0%, hsl(var(--secondary) / 0.15) 0%, transparent 60%)' }}
+                  />
+
+                  {/* Avatar */}
+                  <motion.div
+                    className="relative mb-6 z-10"
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <div className="w-28 h-28 rounded-full overflow-hidden border-[3px] border-secondary/40 group-hover:border-secondary transition-colors duration-500 shadow-lg">
+                      <img src={f.image} alt={f.name} className="w-full h-full object-cover" />
+                    </div>
+                    {/* Pulse ring */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border-2 border-secondary/0 group-hover:border-secondary/30"
+                      animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0, 0.4] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                  </motion.div>
+
+                  {/* Name & Role — always visible */}
+                  <h3 className="text-xl font-bold text-primary-foreground mb-1 z-10 relative">{f.name}</h3>
+                  <p className="text-secondary text-sm font-body mb-4 z-10 relative">{f.role}</p>
+
+                  {/* Divider */}
+                  <motion.div
+                    className="h-px w-12 bg-secondary/40 mb-4 z-10"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.15 + 0.4, duration: 0.5, ease: easeOut }}
+                  />
+
+                  {/* Bio — reveals on hover with smooth expand */}
+                  <div className="z-10 relative overflow-hidden transition-all duration-500 ease-out max-h-0 group-hover:max-h-[300px] opacity-0 group-hover:opacity-100">
+                    <p className="text-primary-foreground/70 text-sm font-body leading-relaxed">
+                      {f.bio}
+                    </p>
+                  </div>
+
+                  {/* Hint text when not hovered */}
+                  <p className="text-primary-foreground/30 text-xs font-body mt-2 z-10 group-hover:opacity-0 transition-opacity duration-300">
+                    Hover to read more
+                  </p>
                 </motion.div>
               </motion.div>
             ))}
           </div>
 
           <motion.p
-            className="text-center text-primary-foreground/50 font-body mt-12 text-sm"
+            className="text-center text-primary-foreground/40 font-body mt-16 text-sm"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.6 }}
           >
-            12+ In-house Designers, Design Managers, Execution Managers & Sales Managers
+            12+ In-house Designers, Design Managers, Execution Managers & Sales Managers driving innovation.
           </motion.p>
         </div>
       </section>
