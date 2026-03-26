@@ -296,10 +296,10 @@ export default function ServiceDetail() {
       />
 
       {/* ═══════════ SECTION 1: Editorial Overview ═══════════ */}
-      <section className="py-16 lg:py-24 bg-background">
-        <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
+      <section className="py-10 lg:py-16 bg-background">
+        <div className="container mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
           {/* Row 1: Text left, Image right */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16 lg:mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-12 lg:mb-16">
             <motion.div {...fadeUp}>
               <h2 className="font-display text-3xl md:text-4xl lg:text-[42px] text-foreground leading-tight mb-6 font-semibold">
                 {service.title}
@@ -312,9 +312,10 @@ export default function ServiceDetail() {
             </motion.div>
             <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.15 }}>
               <img
-                src={service.image}
+                src={serviceHeroImages[service.slug] || service.image}
                 alt={service.title}
                 className="w-full h-[300px] lg:h-[420px] object-cover rounded-xl"
+                loading="lazy"
               />
             </motion.div>
           </div>
