@@ -56,6 +56,18 @@ import portfolio8 from '@/assets/services/portfolio-8.jpg';
 import portfolio9 from '@/assets/services/portfolio-9.jpg';
 import portfolio10 from '@/assets/services/portfolio-10.jpg';
 import darkshellBg from '@/assets/services/darkshell-bg.jpg';
+import darkshellBg2 from '@/assets/services/darkshell-bg-2.jpg';
+import darkshellBg3 from '@/assets/services/darkshell-bg-3.jpg';
+import darkshellBg4 from '@/assets/services/darkshell-bg-4.jpg';
+import darkshellBg5 from '@/assets/services/darkshell-bg-5.jpg';
+
+const serviceDarkshellBg: Record<string, string> = {
+  "residential-interior-design": darkshellBg,
+  "commercial-interior-design": darkshellBg2,
+  "space-planning-concept-development": darkshellBg3,
+  "material-color-consultation": darkshellBg4,
+  "end-to-end-project-execution": darkshellBg5,
+};
 
 // Each service gets a unique set of portfolio images — no repeats across services
 const servicePortfolioImages: Record<string, string[]> = {
@@ -508,7 +520,7 @@ export default function ServiceDetail() {
       </section>
 
       {/* ═══════════ SECTION 4: Sample Works Carousel ═══════════ */}
-      <SampleWorksCarousel gallery={gallery} serviceTitle={service.title} fadeUp={fadeUp} />
+      <SampleWorksCarousel gallery={gallery} serviceTitle={service.title} fadeUp={fadeUp} slug={service.slug} />
 
       {/* ═══════════ SECTION 5: FAQ ═══════════ */}
       <section className="py-10 lg:py-16 bg-muted/30">
@@ -580,7 +592,7 @@ export default function ServiceDetail() {
 }
 
 /* ═══════════ Sample Works Carousel Component ═══════════ */
-function SampleWorksCarousel({ gallery, serviceTitle, fadeUp }: { gallery: string[]; serviceTitle: string; fadeUp: any }) {
+function SampleWorksCarousel({ gallery, serviceTitle, fadeUp, slug }: { gallery: string[]; serviceTitle: string; fadeUp: any; slug: string }) {
   const allImages = gallery; // unique images, no duplication
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start', slidesToScroll: 1 });
 
@@ -594,7 +606,7 @@ function SampleWorksCarousel({ gallery, serviceTitle, fadeUp }: { gallery: strin
       {/* Darkshell background */}
       <div className="absolute inset-0">
         <img
-          src={darkshellBg}
+          src={serviceDarkshellBg[slug] || darkshellBg}
           alt=""
           className="w-full h-full object-cover opacity-40"
           loading="lazy"
