@@ -478,7 +478,7 @@ export default function ServiceDetail() {
       <SampleWorksCarousel gallery={gallery} serviceTitle={service.title} fadeUp={fadeUp} />
 
       {/* ═══════════ SECTION 5: FAQ ═══════════ */}
-      <section className="py-16 lg:py-24 bg-warm-bg">
+      <section className="py-16 lg:py-24 bg-muted/30">
         <div className="container mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
           <motion.div className="text-center mb-14" {...fadeUp}>
             <h2 className="font-display text-3xl md:text-4xl text-foreground font-semibold">Frequently Asked Questions</h2>

@@ -163,8 +163,8 @@ export default function FoundersSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.15, ease: easeOut }}
             >
-              <div className="aspect-[3/2] overflow-hidden">
-                <img src={f.image} alt={f.name} className="w-full h-full object-cover object-top" />
+              <div className="overflow-hidden">
+                <img src={f.image} alt={f.name} className="w-full h-auto object-cover object-top" />
               </div>
               <div className="p-5">
                 <h3 className="text-lg font-bold text-primary-foreground mb-1">{f.name}</h3>
