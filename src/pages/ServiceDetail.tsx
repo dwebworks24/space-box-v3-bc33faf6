@@ -520,7 +520,7 @@ export default function ServiceDetail() {
       </section>
 
       {/* ═══════════ SECTION 4: Sample Works Carousel ═══════════ */}
-      <SampleWorksCarousel gallery={gallery} serviceTitle={service.title} fadeUp={fadeUp} />
+      <SampleWorksCarousel gallery={gallery} serviceTitle={service.title} fadeUp={fadeUp} slug={service.slug} />
 
       {/* ═══════════ SECTION 5: FAQ ═══════════ */}
       <section className="py-10 lg:py-16 bg-muted/30">
