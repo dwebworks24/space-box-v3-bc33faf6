@@ -87,51 +87,55 @@ export default function FoundersSection() {
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.7, delay: i * 0.15, ease: easeOut }}
               >
-                {/* Full image — always visible */}
-                <img
-                  src={f.image}
-                  alt={f.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-                  style={{ transform: isActive ? 'scale(1.05)' : 'scale(1)' }}
-                />
-
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent" />
+                {/* Image section — takes left side when expanded, full when collapsed */}
+                <div
+                  className="absolute top-0 left-0 h-full transition-all duration-[600ms]"
+                  style={{ width: isActive ? '40%' : '100%', transition: 'width 0.6s cubic-bezier(0.22, 1, 0.36, 1)' }}
+                >
+                  <img
+                    src={f.image}
+                    alt={f.name}
+                    className="w-full h-full object-cover object-top transition-transform duration-700"
+                    style={{ transform: isActive ? 'scale(1.03)' : 'scale(1)' }}
+                  />
+                  {/* Gradient only in collapsed state */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent transition-opacity duration-500"
+                    style={{ opacity: isActive ? 0 : 1 }}
+                  />
+                </div>
 
                 {/* Collapsed state — name & title at bottom */}
                 <div
-                  className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-opacity duration-500"
+                  className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-opacity duration-400"
                   style={{ opacity: isActive ? 0 : 1 }}
                 >
                   <h3 className="text-lg font-bold text-primary-foreground leading-tight">{f.name}</h3>
                   <p className="text-secondary text-xs font-body mt-1">{f.role}</p>
                 </div>
 
-                {/* Expanded state — split layout with bio panel */}
+                {/* Expanded state — bio panel on right */}
                 <div
-                  className="absolute inset-0 z-10 flex transition-opacity duration-500"
-                  style={{ opacity: isActive ? 1 : 0, pointerEvents: isActive ? 'auto' : 'none' }}
+                  className="absolute top-0 right-0 h-full flex flex-col justify-center px-8 lg:px-10 py-8 bg-primary/95 transition-all duration-[600ms]"
+                  style={{
+                    width: isActive ? '60%' : '0%',
+                    opacity: isActive ? 1 : 0,
+                    transition: 'width 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease',
+                  }}
                 >
-                  {/* Left spacer for image area */}
-                  <div className="w-[45%] shrink-0" />
-
-                  {/* Right bio panel */}
-                  <div className="flex-1 flex flex-col justify-center px-8 py-10 bg-gradient-to-r from-primary/80 via-primary/90 to-primary/95">
-                    <div
-                      className="transition-all duration-600"
-                      style={{
-                        transform: isActive ? 'translateX(0)' : 'translateX(40px)',
-                        opacity: isActive ? 1 : 0,
-                        transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, opacity 0.5s ease 0.15s',
-                      }}
-                    >
-                      <div className="h-px w-12 bg-secondary mb-5" />
-                      <h3 className="text-2xl lg:text-3xl font-bold text-primary-foreground mb-2">{f.name}</h3>
-                      <p className="text-secondary text-sm font-body mb-5">{f.role}</p>
-                      <p className="text-primary-foreground/70 text-sm font-body leading-relaxed max-w-sm">
-                        {f.bio}
-                      </p>
-                    </div>
+                  <div
+                    style={{
+                      transform: isActive ? 'translateX(0)' : 'translateX(30px)',
+                      opacity: isActive ? 1 : 0,
+                      transition: 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, opacity 0.4s ease 0.2s',
+                    }}
+                  >
+                    <div className="h-px w-12 bg-secondary mb-4" />
+                    <h3 className="text-xl lg:text-2xl font-bold text-primary-foreground mb-1.5 whitespace-nowrap">{f.name}</h3>
+                    <p className="text-secondary text-xs lg:text-sm font-body mb-4 whitespace-nowrap">{f.role}</p>
+                    <p className="text-primary-foreground/70 text-xs lg:text-sm font-body leading-relaxed">
+                      {f.bio}
+                    </p>
                   </div>
                 </div>
 
@@ -150,24 +154,24 @@ export default function FoundersSection() {
         </div>
 
         {/* Mobile — stacked cards */}
-        <div className="md:hidden space-y-6">
+        <div className="md:hidden space-y-5">
           {founders.map((f, i) => (
             <motion.div
               key={f.name}
-              className="relative rounded-2xl overflow-hidden border border-primary-foreground/10 group"
+              className="relative rounded-2xl overflow-hidden border border-primary-foreground/10"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.15, ease: easeOut }}
             >
-              <div className="aspect-[3/4] overflow-hidden">
-                <img src={f.image} alt={f.name} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
+              <div className="aspect-[4/5] overflow-hidden">
+                <img src={f.image} alt={f.name} className="w-full h-full object-cover object-top" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent" />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="text-xl font-bold text-primary-foreground mb-1">{f.name}</h3>
-                <p className="text-secondary text-sm font-body mb-3">{f.role}</p>
-                <p className="text-primary-foreground/70 text-sm font-body leading-relaxed">{f.bio}</p>
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <h3 className="text-lg font-bold text-primary-foreground mb-1">{f.name}</h3>
+                <p className="text-secondary text-xs font-body mb-2">{f.role}</p>
+                <p className="text-primary-foreground/60 text-xs font-body leading-relaxed line-clamp-4">{f.bio}</p>
               </div>
             </motion.div>
           ))}
