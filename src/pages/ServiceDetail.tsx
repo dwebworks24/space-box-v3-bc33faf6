@@ -589,12 +589,23 @@ function SampleWorksCarousel({ gallery, serviceTitle, fadeUp }: { gallery: strin
   const labels = ['Living Interiors', 'Workspace Interiors', 'Reception Interiors', 'Modern Interiors', 'Classic Interiors', 'Contemporary Interiors'];
 
   return (
-    <section className="py-10 lg:py-16 bg-background">
-      <div className="container mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
+    <section className="py-10 lg:py-16 relative overflow-hidden bg-[#0a0a0a]">
+      {/* Dark glossy gradient background blend */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111113] to-[#0a0a0a]" />
+        <div className="absolute top-[-40%] right-[-20%] w-[80%] h-[80%] rounded-full bg-gradient-to-bl from-white/[0.04] via-white/[0.02] to-transparent blur-3xl" />
+        <div className="absolute bottom-[-30%] left-[-10%] w-[60%] h-[60%] rounded-full bg-gradient-to-tr from-white/[0.03] via-transparent to-transparent blur-3xl" />
+        <div className="absolute top-[20%] left-[30%] w-[40%] h-[50%] rounded-full bg-gradient-to-b from-white/[0.015] to-transparent blur-2xl" />
+        {/* Subtle glossy arc highlight */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-8 md:px-12 lg:px-16 relative z-10">
         <motion.div className="text-center mb-14" {...fadeUp}>
           <p className="text-secondary text-[13px] uppercase tracking-[3px] mb-3 font-display font-semibold">PORTFOLIO</p>
-          <h2 className="font-display text-3xl md:text-4xl text-foreground font-semibold">From Vision to Execution</h2>
-          <p className="text-muted-foreground text-sm mt-3 max-w-2xl mx-auto font-body">
+          <h2 className="font-display text-3xl md:text-4xl text-white font-semibold">From Vision to Execution</h2>
+          <p className="text-white/50 text-sm mt-3 max-w-2xl mx-auto font-body">
             Creating a well-designed space requires a full range of design services including furniture selection, colour coordination, and project management.
           </p>
         </motion.div>
@@ -605,7 +616,7 @@ function SampleWorksCarousel({ gallery, serviceTitle, fadeUp }: { gallery: strin
               {allImages.map((img, i) => (
                 <div key={i} className="min-w-0 shrink-0 grow-0 basis-full sm:basis-1/2 lg:basis-1/3 pl-4">
                   <div className="group">
-                    <div className="relative rounded-xl overflow-hidden h-[220px] md:h-[260px]">
+                    <div className="relative rounded-xl overflow-hidden h-[220px] md:h-[260px] ring-1 ring-white/10">
                       <img
                         src={img}
                         alt={`${serviceTitle} project ${i + 1}`}
@@ -613,7 +624,7 @@ function SampleWorksCarousel({ gallery, serviceTitle, fadeUp }: { gallery: strin
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
                     </div>
-                    <p className="text-center text-foreground font-display font-semibold mt-4 text-sm">{labels[i % labels.length]}</p>
+                    <p className="text-center text-white/80 font-display font-semibold mt-4 text-sm">{labels[i % labels.length]}</p>
                   </div>
                 </div>
               ))}
@@ -623,13 +634,13 @@ function SampleWorksCarousel({ gallery, serviceTitle, fadeUp }: { gallery: strin
           {/* Carousel arrows */}
           <button
             onClick={scrollPrev}
-            className="absolute -left-3 md:-left-5 top-[130px] md:top-[130px] w-10 h-10 rounded-full bg-background border border-border shadow-md flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-all"
+            className="absolute -left-3 md:-left-5 top-[130px] md:top-[130px] w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 shadow-md flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-all text-white/70"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <button
             onClick={scrollNext}
-            className="absolute -right-3 md:-right-5 top-[130px] md:top-[130px] w-10 h-10 rounded-full bg-background border border-border shadow-md flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-all"
+            className="absolute -right-3 md:-right-5 top-[130px] md:top-[130px] w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 shadow-md flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-all text-white/70"
           >
             <ArrowRight className="w-4 h-4" />
           </button>
