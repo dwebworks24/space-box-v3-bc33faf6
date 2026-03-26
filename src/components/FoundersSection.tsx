@@ -154,24 +154,24 @@ export default function FoundersSection() {
         </div>
 
         {/* Mobile — stacked cards */}
-        <div className="md:hidden space-y-6">
+        <div className="md:hidden space-y-5">
           {founders.map((f, i) => (
             <motion.div
               key={f.name}
-              className="relative rounded-2xl overflow-hidden border border-primary-foreground/10 group"
+              className="relative rounded-2xl overflow-hidden border border-primary-foreground/10"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.15, ease: easeOut }}
             >
-              <div className="aspect-[3/4] overflow-hidden">
-                <img src={f.image} alt={f.name} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
+              <div className="aspect-[4/5] overflow-hidden">
+                <img src={f.image} alt={f.name} className="w-full h-full object-cover object-top" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent" />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="text-xl font-bold text-primary-foreground mb-1">{f.name}</h3>
-                <p className="text-secondary text-sm font-body mb-3">{f.role}</p>
-                <p className="text-primary-foreground/70 text-sm font-body leading-relaxed">{f.bio}</p>
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <h3 className="text-lg font-bold text-primary-foreground mb-1">{f.name}</h3>
+                <p className="text-secondary text-xs font-body mb-2">{f.role}</p>
+                <p className="text-primary-foreground/60 text-xs font-body leading-relaxed line-clamp-4">{f.bio}</p>
               </div>
             </motion.div>
           ))}
