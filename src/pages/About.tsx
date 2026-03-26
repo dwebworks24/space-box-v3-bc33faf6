@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
   MessageSquare, Box, Maximize, Palette, Sofa, Lamp, Frame,
   ClipboardList, HeadphonesIcon,
-  Compass, Layers, Shield, Wrench, Facebook, Twitter, Linkedin, Instagram
+  Compass, Layers, Shield, Wrench,
 } from 'lucide-react';
 import teamAmruta from '@/assets/team-amruta.jpg';
 import teamMini from '@/assets/team-mini.jpg';
