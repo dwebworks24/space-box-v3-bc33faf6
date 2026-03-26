@@ -580,7 +580,7 @@ export default function ServiceDetail() {
 
 /* ═══════════ Sample Works Carousel Component ═══════════ */
 function SampleWorksCarousel({ gallery, serviceTitle, fadeUp }: { gallery: string[]; serviceTitle: string; fadeUp: any }) {
-  const allImages = [...gallery, ...gallery]; // double for more slides
+  const allImages = gallery; // unique images, no duplication
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start', slidesToScroll: 1 });
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
