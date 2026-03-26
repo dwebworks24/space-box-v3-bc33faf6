@@ -66,7 +66,7 @@ export default function FoundersSection() {
 
         {/* Accordion Cards — Desktop */}
         <div
-          className="hidden md:flex gap-3 h-[550px] lg:h-[600px]"
+          className="hidden md:flex gap-3 h-[420px] lg:h-[480px]"
           onMouseLeave={() => setActiveIndex(null)}
         >
           {founders.map((f, i) => {
