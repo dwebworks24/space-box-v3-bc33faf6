@@ -31,8 +31,8 @@ const SITE_READINESS = [
 
 const DESIGN_AESTHETICS = [
   { value: "classical", label: "Classical", desc: "Detailed moldings, ornate furniture, symmetry, and rich textures." },
-  { value: "contemporary", label: "Contemporary", desc: "Sleek lines, neutral palettes, and current "of-the-moment" trends." },
-  { value: "modern", label: "Modern / Minimalist", desc: "Functional, "less is more," clean geometric shapes." },
+  { value: "contemporary", label: "Contemporary", desc: "Sleek lines, neutral palettes, and current 'of-the-moment' trends." },
+  { value: "modern", label: "Modern / Minimalist", desc: "Functional, 'less is more,' clean geometric shapes." },
   { value: "industrial", label: "Industrial", desc: "Raw materials like wood, metal, and exposed brick." },
 ];
 
