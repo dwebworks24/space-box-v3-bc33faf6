@@ -15,6 +15,7 @@ import ServiceDetail from "./pages/ServiceDetail";
 import BlogDetail from "./pages/BlogDetail";
 import Careers from "./pages/Careers";
 import StartProject from "./pages/StartProject";
+import ClientBrief from "./pages/ClientBrief";
 import NotFound from "./pages/NotFound";
 import { useEffect } from "react";
 
