@@ -50,6 +50,9 @@ const App = () => (
             <Route path="/careers" element={<Careers />} />
             <Route path="/start-project" element={<StartProject />} />
             <Route path="/client-brief" element={<ClientBrief />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
           </Route>
           <Route path="/admin" element={<AdminRedirect />} />
           <Route path="/admin/*" element={<AdminRedirect />} />
