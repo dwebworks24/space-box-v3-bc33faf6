@@ -17,6 +17,9 @@ import Careers from "./pages/Careers";
 import StartProject from "./pages/StartProject";
 import ClientBrief from "./pages/ClientBrief";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import RefundPolicy from "./pages/RefundPolicy";
 import { useEffect } from "react";
 
 const AdminRedirect = () => {
