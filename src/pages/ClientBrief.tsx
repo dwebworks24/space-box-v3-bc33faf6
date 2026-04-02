@@ -225,7 +225,7 @@ const ClientBrief = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
       <SEO
         title="Client Project Brief | SpaceBox Concepts"
         description="Fill out the Client Project Brief to help us understand your vision and property requirements. Register with a ₹5,000 refundable fee."
@@ -233,7 +233,55 @@ const ClientBrief = () => {
       />
       <SubBanner title="Client Project" highlight="Brief" image="" />
 
-      <div className="container mx-auto px-4 py-12 md:py-16 max-w-3xl">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        {/* Large diamond shape - top right */}
+        <div className="absolute -top-20 -right-20 w-[500px] h-[500px] border border-secondary/10 rotate-45 opacity-50" />
+        <div className="absolute -top-10 -right-10 w-[400px] h-[400px] border border-secondary/5 rotate-45 opacity-50" />
+
+        {/* Dot grid pattern - left side */}
+        <div className="absolute top-[30%] -left-10 w-[200px] h-[400px] opacity-[0.08]"
+          style={{
+            backgroundImage: 'radial-gradient(circle, hsl(var(--secondary)) 1px, transparent 1px)',
+            backgroundSize: '20px 20px',
+          }}
+        />
+
+        {/* Diagonal lines - bottom left */}
+        <svg className="absolute bottom-[10%] left-0 w-[300px] h-[300px] opacity-[0.06]" viewBox="0 0 300 300">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <line key={i} x1={0} y1={i * 25} x2={300} y2={i * 25 + 100} stroke="hsl(var(--secondary))" strokeWidth="1" />
+          ))}
+        </svg>
+
+        {/* Circle ring - right side middle */}
+        <div className="absolute top-[55%] -right-16 w-[250px] h-[250px] rounded-full border-2 border-secondary/8 opacity-50" />
+        <div className="absolute top-[57%] -right-10 w-[200px] h-[200px] rounded-full border border-secondary/5 opacity-50" />
+
+        {/* Small diamond accent - left center */}
+        <div className="absolute top-[45%] left-[5%] w-16 h-16 border border-secondary/15 rotate-45 opacity-50" />
+
+        {/* Gradient glow - top */}
+        <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-secondary/[0.03] blur-[100px]" />
+
+        {/* Gradient glow - bottom */}
+        <div className="absolute bottom-[5%] right-[10%] w-[400px] h-[400px] rounded-full bg-secondary/[0.04] blur-[80px]" />
+
+        {/* Horizontal lines accent - top left */}
+        <div className="absolute top-[20%] left-0 space-y-3 opacity-[0.07]">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="bg-secondary" style={{ height: '1px', width: `${80 - i * 15}px` }} />
+          ))}
+        </div>
+
+        {/* Cross pattern - bottom right */}
+        <svg className="absolute bottom-[20%] right-[5%] w-8 h-8 opacity-[0.12]" viewBox="0 0 32 32">
+          <line x1="16" y1="0" x2="16" y2="32" stroke="hsl(var(--secondary))" strokeWidth="1.5" />
+          <line x1="0" y1="16" x2="32" y2="16" stroke="hsl(var(--secondary))" strokeWidth="1.5" />
+        </svg>
+      </div>
+
+      <div className="container mx-auto px-4 py-12 md:py-16 max-w-3xl relative z-10">
         <p className="text-center text-muted-foreground mb-10 text-sm">
           Please fill out this initial survey to help us understand your vision and property requirements.
         </p>
